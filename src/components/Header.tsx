@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Logo } from "@/components/Logo";
+import { BrandLogo } from "@/components/BrandLogo";
 import { WhatsappLink, PhoneLink, ScrollToFormButton, scrollToForm } from "@/components/CtaButtons";
 import { MenuIcon, CloseIcon, PhoneIcon, WhatsappIcon } from "@/components/icons";
 import { COMPANY } from "@/lib/constants";
@@ -43,7 +43,7 @@ export function Header() {
       <div className="container-px flex h-16 items-center justify-between gap-4 lg:h-20">
         {/* לוגו */}
         <a href="#top" className="flex items-center" aria-label={COMPANY.name}>
-          <Logo markClassName="h-9 w-9 lg:h-11 lg:w-11" />
+          <BrandLogo variant="header" imgClassName="h-9 w-auto sm:h-10 lg:h-12" />
         </a>
 
         {/* ניווט - דסקטופ */}

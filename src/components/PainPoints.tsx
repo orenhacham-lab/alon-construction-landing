@@ -18,7 +18,7 @@ function AlertGlyph() {
 
 export function PainPoints() {
   return (
-    <section className="bg-navy-50/60 py-20 lg:py-24">
+    <section className="bg-navy-50/60 py-16 lg:py-20">
       <div className="container-px">
         <SectionHeading
           eyebrow="אל תדחו טיפול"

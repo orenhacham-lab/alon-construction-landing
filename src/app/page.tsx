@@ -1,5 +1,6 @@
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
+import { TrustBar } from "@/components/TrustBar";
 import { AboutIntro } from "@/components/AboutIntro";
 import { PainPoints } from "@/components/PainPoints";
 import { Services } from "@/components/Services";
@@ -17,6 +18,7 @@ export default function HomePage() {
       <Header />
       <main>
         <Hero />
+        <TrustBar />
         <AboutIntro />
         <PainPoints />
         <Services />

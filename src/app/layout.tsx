@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Assistant } from "next/font/google";
 import "./globals.css";
-import { GtmScript, GtmNoScript } from "@/components/GoogleTagManager";
+import { GtmHeadScript, GtmNoScript } from "@/components/GoogleTagManager";
 import { COMPANY, CONTACT } from "@/lib/constants";
 
 const assistant = Assistant({
@@ -102,7 +102,8 @@ export default function RootLayout({
   return (
     <html lang="he" dir="rtl" className={assistant.variable}>
       <head>
-        <GtmScript />
+        {/* Google Tag Manager - סקריפט רשמי ב-head */}
+        <GtmHeadScript />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

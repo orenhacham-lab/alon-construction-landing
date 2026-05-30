@@ -1,16 +1,11 @@
 import { Reveal } from "@/components/Reveal";
-import { ShieldIcon, CheckCircleIcon, ServiceIcon } from "@/components/icons";
+import { ImageWithFallback } from "@/components/ImageWithFallback";
+import { SceneConcreteBefore, SceneFacadeAfter } from "@/components/scenes";
 import { COMPANY } from "@/lib/constants";
-
-const HIGHLIGHTS = [
-  { icon: "reinforce" as const, label: "ניסיון בפרויקטים מורכבים" },
-  { icon: "authority" as const, label: "עבודה מול רשויות וחברות עירוניות" },
-  { icon: "occupied" as const, label: "טיפול במבנים מאוכלסים" },
-];
 
 export function AboutIntro() {
   return (
-    <section className="relative bg-white py-20 lg:py-24">
+    <section className="relative bg-white pb-16 pt-10 lg:pb-20 lg:pt-14">
       <div className="container-px grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
         {/* טקסט */}
         <div className="lg:col-span-7">
@@ -37,33 +32,30 @@ export function AboutIntro() {
           </Reveal>
         </div>
 
-        {/* כרטיס מודגש */}
+        {/* ויזואל "לפני / אחרי" */}
         <div className="lg:col-span-5">
           <Reveal delay={150}>
-            <div className="dot-grid relative overflow-hidden rounded-3xl bg-navy-gradient p-8 text-white shadow-card-hover">
-              <div className="pointer-events-none absolute -left-10 -top-10 h-40 w-40 rounded-full bg-teal-500/20 blur-2xl" />
-              <p className="text-sm font-bold uppercase tracking-wide text-teal-300">
-                {COMPANY.tagline}
-              </p>
-              <p className="mt-3 text-2xl font-extrabold leading-snug">
-                סטנדרט עבודה שלא מתפשר על בטיחות, איכות וגימור.
-              </p>
-              <ul className="mt-7 space-y-4">
-                {HIGHLIGHTS.map((h) => (
-                  <li key={h.label} className="flex items-center gap-3">
-                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/10 text-teal-300">
-                      <ServiceIcon name={h.icon} className="h-6 w-6" />
-                    </span>
-                    <span className="font-semibold text-navy-50">{h.label}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-7 flex items-center gap-4 border-t border-white/10 pt-5 text-sm text-navy-100/80">
-                <span className="inline-flex items-center gap-1.5">
-                  <ShieldIcon className="h-4 w-4 text-leaf-light" /> בטיחות מלאה
+            <div className="overflow-hidden rounded-3xl border border-navy-100 bg-white shadow-card-hover">
+              <div className="relative h-44 sm:h-52">
+                <ImageWithFallback
+                  src="/images/concrete-restoration.jpg"
+                  alt="שיקום בטונים וברזל חשוף לפני טיפול"
+                  imgClassName="absolute inset-0 h-full w-full object-cover"
+                  fallback={<SceneConcreteBefore className="absolute inset-0 h-full w-full" />}
+                />
+                <span className="absolute right-4 top-4 rounded-full bg-amber-500/95 px-3 py-1 text-xs font-extrabold text-white shadow">
+                  לפני · בטון מתפורר וברזל חשוף
                 </span>
-                <span className="inline-flex items-center gap-1.5">
-                  <CheckCircleIcon className="h-4 w-4 text-leaf-light" /> גימור גבוה
+              </div>
+              <div className="relative h-44 border-t-4 border-white sm:h-52">
+                <ImageWithFallback
+                  src="/images/facade-after.jpg"
+                  alt="חזית הבניין לאחר חידוש ושיקום"
+                  imgClassName="absolute inset-0 h-full w-full object-cover"
+                  fallback={<SceneFacadeAfter className="absolute inset-0 h-full w-full" />}
+                />
+                <span className="absolute right-4 top-4 rounded-full bg-leaf/95 px-3 py-1 text-xs font-extrabold text-white shadow">
+                  אחרי · חזית מחודשת
                 </span>
               </div>
             </div>

@@ -1,4 +1,4 @@
-import { Logo } from "@/components/Logo";
+import { BrandLogo } from "@/components/BrandLogo";
 import { WhatsappLink, PhoneLink } from "@/components/CtaButtons";
 import { PhoneIcon, WhatsappIcon, MailIcon, MapPinIcon, FaxIcon } from "@/components/icons";
 import { COMPANY, CONTACT } from "@/lib/constants";
@@ -20,7 +20,7 @@ export function Footer() {
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-12">
           {/* מותג */}
           <div className="lg:col-span-4">
-            <Logo tone="dark" showTagline markClassName="h-12 w-12" />
+            <BrandLogo variant="footer" imgClassName="h-12 w-auto" showTagline />
             <p className="mt-5 max-w-sm leading-relaxed text-navy-100/70">
               מתמחים בשיקום בטונים, חיזוק וחידוש מבנים, טיפול במבנים מסוכנים
               ושיקום מבנים לשימור - בליווי מקצועי ובבטיחות מלאה.

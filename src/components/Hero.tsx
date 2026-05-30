@@ -7,14 +7,14 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative overflow-hidden bg-navy-gradient pt-28 lg:pt-36"
+      className="relative overflow-hidden bg-navy-gradient pt-24 lg:pt-32"
     >
       {/* שכבות רקע */}
       <div className="pointer-events-none absolute inset-0 bg-hero-radial" />
       <div className="pointer-events-none absolute inset-0 blueprint-grid opacity-[0.4]" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-navy-950/60 to-transparent" />
 
-      <div className="container-px relative grid items-center gap-12 pb-20 lg:grid-cols-2 lg:gap-8 lg:pb-28">
+      <div className="container-px relative grid items-center gap-12 pb-14 lg:grid-cols-2 lg:gap-8 lg:pb-20">
         {/* תוכן */}
         <div className="animate-fade-up text-center lg:text-right">
           <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-teal-400/30 bg-teal-400/10 px-4 py-1.5 text-sm font-bold text-teal-200">

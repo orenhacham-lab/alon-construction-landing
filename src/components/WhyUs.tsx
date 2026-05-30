@@ -7,7 +7,7 @@ export function WhyUs() {
   return (
     <section
       id="why-us"
-      className="relative scroll-mt-24 overflow-hidden bg-navy-gradient py-20 lg:py-24"
+      className="relative scroll-mt-24 overflow-hidden bg-navy-gradient pb-16 pt-14 lg:pb-20 lg:pt-16"
     >
       <div className="pointer-events-none absolute inset-0 blueprint-grid opacity-40" />
       <div className="pointer-events-none absolute -left-20 top-1/3 h-72 w-72 rounded-full bg-teal-500/15 blur-3xl" />

@@ -4,7 +4,7 @@ import { PROCESS_STEPS } from "@/lib/constants";
 
 export function Process() {
   return (
-    <section id="process" className="scroll-mt-24 bg-white py-20 lg:py-24">
+    <section id="process" className="scroll-mt-24 bg-white pb-14 pt-16 lg:pb-16 lg:pt-20">
       <div className="container-px">
         <SectionHeading
           eyebrow="איך זה עובד"

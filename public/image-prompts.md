@@ -1,81 +1,79 @@
 # פרומפטים ליצירת תמונות AI - אלון עבודות בניה בע"מ
 
-קובץ זה מרכז פרומפטים מדויקים ליצירת תמונות עבור דף הנחיתה.
-ניתן להשתמש בכלים כמו Midjourney, DALL·E, Adobe Firefly, Ideogram וכד'.
+קובץ זה מרכז פרומפטים מדויקים ליצירת התמונות לדף הנחיתה.
+ניתן להשתמש ב-Midjourney, DALL·E, Adobe Firefly, Ideogram וכד'.
+
+## ⚙️ איך זה עובד (חשוב)
+
+הקוד בנוי כך ש**ברגע שתעלו קובץ תמונה בשם המתאים לתיקיית `public/images/`,
+התמונה האמיתית תחליף אוטומטית את ה-placeholder הגרפי (SVG)** - בלי שינוי קוד.
+עד אז מוצג ויזואל SVG מקצועי במקום התמונה.
 
 **הנחיות כלליות:**
 - סגנון: ריאליסטי, יוקרתי, אמין, מקצועי. לא "סטוקי" וזול.
 - פלטת צבעים תואמת מותג: כחול כהה (#0F2A47), טורקיז/תכלת (#1CA3B8), לבן, אפור.
-- יחס לרוחב (16:9) לתמונת Hero, ריבועי (1:1) לכרטיסים.
-- **חשוב:** לוודא רישיון שימוש מסחרי. אין להשתמש בתמונות אקראיות מהאינטרנט ללא רישיון.
-
-לאחר יצירת התמונות, יש לשמור אותן בתיקיית `/public/images/` ולעדכן את הקומפוננטות הרלוונטיות
-(למשל החלפת ה-SVG ב-`HeroVisual.tsx` ב-`next/image`).
+- פורמט מומלץ: `.jpg` או `.webp`, איכות גבוהה, משקל מותאם לוובו (עד ~300KB לתמונה).
+- ⚠️ יש לוודא רישיון שימוש מסחרי. **אין** להשתמש בתמונות אקראיות מהאינטרנט ללא רישיון.
 
 ---
 
-## 1. תמונת Hero - בניין מגורים בשיקום
+## 🗂️ טבלת קבצים נדרשים
 
-**English prompt:**
+| מיקום בדף | שם הקובץ המדויק | יחס מומלץ |
+|---|---|---|
+| Hero | `public/images/hero-building.jpg` | אנכי ~14:15 (1120×1200) |
+| אזור "מי אנחנו" - לפני | `public/images/concrete-restoration.jpg` | רוחבי ~4:3 (1000×750) |
+| אזור "מי אנחנו" - אחרי | `public/images/facade-after.jpg` | רוחבי ~4:3 (1000×750) |
+| פרויקט 1 - קיסריה | `public/images/projects/neot-golf-caesarea.jpg` | רוחבי ~16:9 (1200×675) |
+| פרויקט 2 - אזורי חן | `public/images/projects/azorei-chen-tlv.jpg` | רוחבי ~16:9 (1200×675) |
+| פרויקט 3 - בלפור | `public/images/projects/balfour-2-tlv.jpg` | רוחבי ~16:9 (1200×675) |
+
+> **לוגו:** העלו את הלוגו הרשמי כ-`public/logo-original.svg` (מועדף) או `public/logo-original.png` -
+> והוא יחליף אוטומטית את הלוגו בכל האתר (הדר ופוטר).
+
+---
+
+## 1. Hero — `hero-building.jpg`
 > Professional architectural photograph of a multi-story residential building undergoing
 > facade restoration, fully wrapped in clean steel scaffolding with safety netting.
 > Workers in safety gear and hard hats, a tower crane in the background. Soft late-afternoon
-> light, deep blue sky. Cinematic, high-end, sharp focus, premium real-estate photography style.
-> Color grading with deep navy and turquoise tones. 16:9, ultra-realistic, 8k.
+> light, deep blue sky. Cinematic, high-end, premium real-estate photography, sharp focus.
+> Color grade with deep navy and turquoise tones. Vertical 14:15, ultra-realistic, 8k.
+>
+> **Negative:** low quality, cartoon, distorted, cluttered, watermark, text.
 
-**Negative:** low quality, cartoon, distorted, messy, cluttered, watermark, text.
-
----
-
-## 2. שיקום בטונים / ברזל חשוף - לפני טיפול
-
-**English prompt:**
-> Close-up documentary photograph of a damaged reinforced concrete column/wall with exposed
-> rusted rebar, spalling concrete and cracks, on a residential building. Realistic construction
+## 2. שיקום בטונים / ברזל חשוף — `concrete-restoration.jpg`
+> Close-up documentary photograph of a damaged reinforced concrete column on a residential
+> building, with exposed rusted rebar, spalling concrete and cracks. Realistic construction
 > inspection look, neutral daylight, shallow depth of field. Conveys urgency and the need for
 > professional restoration. Photorealistic, detailed texture, 4:3.
+>
+> **Negative:** people, cartoon, oversaturated, watermark.
 
-**Negative:** people, cartoon, oversaturated, watermark.
-
----
-
-## 3. בניין אחרי חידוש חזית
-
-**English prompt:**
+## 3. חידוש חזית (אחרי) — `facade-after.jpg`
 > Professional photo of a freshly renovated residential building facade, smooth new plaster
 > and clean acrylic finish, modern and well maintained, bright clean colors. Blue sky,
-> golden-hour light, elegant and trustworthy. Real-estate marketing style, 16:9, ultra-realistic.
+> golden-hour light, elegant and trustworthy. Real-estate marketing style, 4:3, ultra-realistic.
+>
+> **Negative:** scaffolding, damage, cartoon, watermark, text.
 
-**Negative:** scaffolding, damage, cartoon, watermark, text.
+## 4. פרויקט קיסריה — `projects/neot-golf-caesarea.jpg`
+> Wide shot of a residential compound of several mid-rise apartment buildings in Caesarea,
+> one building wrapped in scaffolding during facade restoration, palm trees, bright
+> Mediterranean daylight, upscale neighborhood. Photorealistic, 16:9.
 
----
+## 5. פרויקט אזורי חן — `projects/azorei-chen-tlv.jpg`
+> Two tall 11-story residential towers in Tel Aviv under structural restoration, scaffolding
+> on the facade, urban setting, clear sky. Professional, trustworthy, photorealistic, 16:9.
 
-## 4. גרפיקות שירותים / אייקונים
-
-**English prompt (icon set):**
-> A set of minimalist line icons for a construction restoration company: concrete repair,
-> structural reinforcement, facade renovation, plastering, dangerous-structure treatment,
-> heritage preservation. Two-tone navy (#0F2A47) and turquoise (#1CA3B8), consistent 1.8px
-> stroke, rounded line caps, on transparent background. Clean, modern, professional.
-
-*(הערה: כרגע מומשו אייקוני SVG מותאמים בקוד עצמו ב-`icons.tsx`.)*
-
----
-
-## 5. רקע עדין עם קווים הנדסיים / תוכנית בניין
-
-**English prompt:**
-> Subtle architectural blueprint background, thin technical drawing lines of a building
-> elevation and floor plan, very light navy lines on white, lots of negative space, elegant,
-> minimal, used as a faint section background. Seamless, high resolution.
-
-*(הערה: כרגע מומש רקע שרטוט/נקודות ב-CSS דרך המחלקות `blueprint-grid` ו-`dot-grid`.)*
+## 6. פרויקט בלפור (שימור) — `projects/balfour-2-tlv.jpg`
+> Elegant restored Bauhaus heritage building in central Tel Aviv (International Style),
+> rounded balconies, smooth light plaster, preservation architecture, soft daylight.
+> Photorealistic, refined, 16:9.
 
 ---
 
-## 6. תמונת רקע לאזור "למה לבחור בנו" (אופציונלי)
+## רקעים / אייקונים (כבר ממומשים בקוד ב-SVG/CSS)
 
-**English prompt:**
-> Wide cinematic shot of an experienced construction crew reviewing plans on a restoration
-> site, scaffolding in the background, professional and trustworthy atmosphere, navy and
-> turquoise color grade, soft daylight. 21:9, photorealistic.
+- אייקוני שירותים — ממומשים ב-`src/components/icons.tsx`.
+- רקע שרטוט הנדסי / נקודות — ממומש ב-CSS דרך `blueprint-grid` ו-`dot-grid`.

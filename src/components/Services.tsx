@@ -5,7 +5,7 @@ import { SERVICES } from "@/lib/constants";
 
 export function Services() {
   return (
-    <section id="services" className="scroll-mt-24 bg-white py-20 lg:py-24">
+    <section id="services" className="scroll-mt-24 bg-white py-16 lg:py-20">
       <div className="container-px">
         <SectionHeading
           eyebrow="התחומים שלנו"

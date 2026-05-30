@@ -4,7 +4,7 @@ import { ArrowLeftIcon } from "@/components/icons";
 
 export function CtaBanner() {
   return (
-    <section className="bg-white py-16 lg:py-20">
+    <section className="bg-white py-12 lg:py-16">
       <div className="container-px">
         <Reveal>
           <div className="relative overflow-hidden rounded-3xl bg-navy-gradient px-6 py-12 text-center shadow-card-hover sm:px-12 lg:py-16">
