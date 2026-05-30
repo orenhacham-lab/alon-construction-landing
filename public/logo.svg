@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 110" width="360" height="110" font-family="Assistant, Arial, sans-serif">
+  <defs>
+    <linearGradient id="leaf" x1="250" y1="92" x2="320" y2="14" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1CA3B8"/>
+      <stop offset="0.55" stop-color="#3A8FBE"/>
+      <stop offset="1" stop-color="#4C86B8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- סמל העץ (בצד ימין, מתאים ל-RTL) -->
+  <g transform="translate(284 18)">
+    <g stroke="#7C8A99" stroke-width="3.4" stroke-linecap="round">
+      <path d="M28 74V40"/>
+      <path d="M28 52 18 41"/>
+      <path d="M28 49 39 39"/>
+      <path d="M28 44 31 36"/>
+    </g>
+    <g fill="url(#leaf)">
+      <circle cx="29" cy="24" r="16"/>
+      <circle cx="15" cy="31" r="10.5"/>
+      <circle cx="43" cy="31" r="10.5"/>
+      <circle cx="22" cy="17" r="9.5"/>
+      <circle cx="38" cy="18" r="9.5"/>
+      <circle cx="29" cy="37" r="12"/>
+    </g>
+    <circle cx="22" cy="19" r="4" fill="#9FE4EE" opacity="0.5"/>
+  </g>
+
+  <!-- שם החברה -->
+  <text x="270" y="58" text-anchor="end" font-size="34" font-weight="800" fill="#0F2A47" direction="rtl">אלון עבודות בניה</text>
+  <text x="276" y="40" text-anchor="end" font-size="14" font-weight="700" fill="#188297">בע״מ</text>
+  <line x1="92" y1="70" x2="270" y2="70" stroke="#1CA3B8" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="270" y="92" text-anchor="end" font-size="16" font-weight="500" fill="#4E769F" direction="rtl">בונים עולמות בשבילך</text>
+</svg>

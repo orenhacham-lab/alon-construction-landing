@@ -1,0 +1,143 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-white text-ink antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    @apply bg-teal-400/25 text-navy-900;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-extrabold tracking-tight text-navy-900;
+    text-wrap: balance;
+  }
+
+  /* טבעת פוקוס נגישה */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    @apply outline-none ring-2 ring-teal-500 ring-offset-2 ring-offset-white;
+  }
+}
+
+@layer components {
+  .container-px {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  /* כותרת מקטע (eyebrow) */
+  .eyebrow {
+    @apply mb-3 inline-flex items-center gap-2 rounded-full border border-teal-200 bg-teal-50 px-4 py-1.5 text-sm font-bold text-teal-700;
+  }
+
+  .section-title {
+    @apply text-3xl font-extrabold leading-tight text-navy-900 sm:text-4xl lg:text-[2.6rem];
+  }
+
+  /* מערכת כפתורים */
+  .btn {
+    @apply inline-flex select-none items-center justify-center gap-2 rounded-xl text-center font-bold leading-none transition-all duration-200 active:scale-[0.98];
+  }
+  .btn-lg {
+    @apply px-7 py-4 text-base sm:text-lg;
+  }
+  .btn-md {
+    @apply px-5 py-3 text-sm sm:text-base;
+  }
+  .btn-primary {
+    @apply bg-teal-gradient text-white shadow-cta hover:brightness-105 hover:shadow-card-hover;
+  }
+  .btn-navy {
+    @apply bg-navy-800 text-white shadow-soft hover:bg-navy-700;
+  }
+  .btn-white {
+    @apply bg-white text-navy-800 shadow-soft hover:bg-navy-50;
+  }
+  .btn-outline-white {
+    @apply border-2 border-white/70 bg-white/5 text-white backdrop-blur-sm hover:bg-white/15;
+  }
+  .btn-whatsapp {
+    @apply bg-[#25D366] text-white shadow-[0_10px_25px_-6px_rgba(37,211,102,0.5)] hover:brightness-105;
+  }
+
+  .card {
+    @apply rounded-2xl border border-navy-100 bg-white shadow-card transition-all duration-300;
+  }
+
+  /* רקע שרטוט הנדסי עדין */
+  .blueprint-grid {
+    background-image: linear-gradient(
+        to left,
+        rgba(255, 255, 255, 0.05) 1px,
+        transparent 1px
+      ),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+  .dot-grid {
+    background-image: radial-gradient(
+      rgba(15, 42, 71, 0.07) 1px,
+      transparent 1px
+    );
+    background-size: 22px 22px;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-l from-teal-400 to-teal-200 bg-clip-text text-transparent;
+  }
+}
+
+@layer utilities {
+  /* חשיפה הדרגתית בגלילה (מופעל ע"י רכיב Reveal) */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+      opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  .balance {
+    text-wrap: balance;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .animate-float,
+  .animate-pulse-ring {
+    animation: none !important;
+  }
+}
