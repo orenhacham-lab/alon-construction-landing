@@ -9,7 +9,7 @@ import { Logo } from "@/components/Logo";
  * (logo-original.svg או logo-original.png), ונופל חזרה ל-SVG המובנה אם אין קובץ.
  * שומר על יחס גובה-רוחב (object-contain) - אינו מותח ואינו חותך את הלוגו.
  */
-const SOURCES = ["/logo-original.svg", "/logo-original.png"];
+const SOURCES = ["/logo-original.png", "/logo-original.svg"];
 
 export function BrandLogo({
   variant = "header",
