@@ -121,14 +121,14 @@ export function Footer() {
       <div className="border-t border-white/10">
         <div className="container-px flex flex-col items-center justify-between gap-2 py-5 text-sm text-navy-100/60 sm:flex-row">
           <p>
-            © {year} {COMPANY.name}. כל הזכויות שמורות.{" "}
+            © {year} {COMPANY.name}. כל הזכויות שמורות. נבנה ע"י{" "}
             <a
               href="https://www.gotop.co.il"
               target="_blank"
               rel="noopener noreferrer"
               className="text-teal-400 hover:text-teal-300 transition-colors"
             >
-              בנוי ע"י Go Top
+              Go Top
             </a>
           </p>
           <p>{COMPANY.tagline}</p>
