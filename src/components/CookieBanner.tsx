@@ -25,28 +25,32 @@ export function CookieBanner() {
     <div
       role="region"
       aria-label="הודעת עוגיות"
-      className="fixed bottom-0 inset-x-0 z-50 bg-navy-900 text-white shadow-2xl"
+      className={[
+        "fixed z-50 bg-navy-900/95 text-white shadow-2xl backdrop-blur-sm",
+        // מובייל: ריבוע קטן בצד שמאל מעל הבר התחתון
+        "bottom-16 left-3 w-64 rounded-2xl p-4",
+        // דסקטופ: כרטיס קומפקטי בפינה שמאל תחתון
+        "lg:bottom-6 lg:left-24 lg:w-80 lg:rounded-2xl lg:p-5",
+      ].join(" ")}
     >
-      <div className="container-px flex flex-col items-start gap-4 py-4 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-sm leading-relaxed text-navy-100/90">
-          אנו משתמשים בעוגיות. המשך השימוש באתר מהווה הסכמה לשימוש בהן בהתאם
-          ל
-          <Link
-            href="/privacy"
-            className="font-semibold text-teal-300 underline underline-offset-2 hover:text-teal-200 transition-colors"
-          >
-            מדיניות הפרטיות
-          </Link>
-          .
-        </p>
-        <button
-          type="button"
-          onClick={accept}
-          className="shrink-0 rounded-xl bg-teal-500 px-5 py-2 text-sm font-bold text-white transition-colors hover:bg-teal-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-teal-400"
+      <p className="text-xs leading-relaxed text-navy-100/90 lg:text-sm">
+        אנו משתמשים בעוגיות. המשך השימוש באתר מהווה הסכמה לשימוש בהן בהתאם
+        ל
+        <Link
+          href="/privacy"
+          className="font-semibold text-teal-300 underline underline-offset-2 hover:text-teal-200 transition-colors"
         >
-          הבנתי, אישור
-        </button>
-      </div>
+          מדיניות הפרטיות
+        </Link>
+        .
+      </p>
+      <button
+        type="button"
+        onClick={accept}
+        className="mt-3 w-full rounded-xl bg-teal-500 py-2 text-sm font-bold text-white transition-colors hover:bg-teal-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-teal-400"
+      >
+        אישור
+      </button>
     </div>
   );
 }

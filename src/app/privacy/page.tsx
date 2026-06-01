@@ -116,8 +116,12 @@ export default function PrivacyPage() {
                   <strong>עוגיות הכרחיות</strong> – נדרשות לתפקוד תקין של האתר.
                 </li>
                 <li>
-                  <strong>עוגיות ניתוח</strong> – Google Tag Manager ושירותי ניתוח סטטיסטי,
-                  המסייעים לנו להבין כיצד המשתמשים גולשים באתר ולשפרו.
+                  <strong>עוגיות ניתוח (Google Analytics)</strong> – מאפשרות ניתוח
+                  סטטיסטי של תנועת הגולשים באתר (ראה סעיף 7 להלן).
+                </li>
+                <li>
+                  <strong>עוגיות פרסום (Google Ads)</strong> – משמשות לצורכי פרסום
+                  ממוקד ומעקב המרות (ראה סעיף 7 להלן).
                 </li>
               </ul>
               <p className="mt-3">
@@ -127,7 +131,88 @@ export default function PrivacyPage() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-navy-900 mb-3">7. שמירת מידע</h2>
+              <h2 className="text-2xl font-bold text-navy-900 mb-3">7. שירותי Google – אנליטיקס ופרסום</h2>
+              <p>
+                האתר עושה שימוש בשירותי Google הבאים, המופעלים על ידי Google LLC,
+                1600 Amphitheatre Parkway, Mountain View, CA 94043, ארה"ב:
+              </p>
+
+              <h3 className="text-lg font-bold text-navy-800 mt-4 mb-2">Google Analytics</h3>
+              <p>
+                אנו משתמשים ב-Google Analytics לניתוח אופן השימוש באתר. השירות
+                אוסף מידע כגון: עמודים שנצפו, זמן שהייה, מקור הגעה וסוג מכשיר —
+                באופן אנונימי ומצובר. המידע מועבר לשרתי Google ומאוחסן שם.
+              </p>
+              <p className="mt-2">
+                אנו פועלים עם הגדרת אנונימיזציה של כתובות IP, כך שאין ב-Google
+                Analytics אפשרות לזהות אותך באופן אישי. ניתן לבטל את מעקב
+                Google Analytics באמצעות{" "}
+                <a
+                  href="https://tools.google.com/dlpage/gaoptout"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-teal-600 underline"
+                  dir="ltr"
+                >
+                  תוסף הדפדפן של Google
+                </a>
+                .
+              </p>
+
+              <h3 className="text-lg font-bold text-navy-800 mt-4 mb-2">Google Ads – פרסום ומעקב המרות</h3>
+              <p>
+                אנו משתמשים ב-Google Ads לצורך:
+              </p>
+              <ul className="list-disc list-inside space-y-1 mt-2 mr-4">
+                <li>
+                  <strong>מעקב המרות</strong> – זיהוי פעולות שביצעת לאחר לחיצה על
+                  מודעה שלנו (כגון: מילוי טופס יצירת קשר).
+                </li>
+                <li>
+                  <strong>רימרקטינג (Remarketing)</strong> – הצגת מודעות ממוקדות
+                  למשתמשים שביקרו בעבר באתר, ברשת Google ובאתרים אחרים.
+                </li>
+              </ul>
+              <p className="mt-2">
+                Google עשויה להשתמש בקוקיז כגון{" "}
+                <span dir="ltr" className="font-mono text-sm">_ga</span>,{" "}
+                <span dir="ltr" className="font-mono text-sm">_gid</span> ו-
+                <span dir="ltr" className="font-mono text-sm">_gcl_au</span>{" "}
+                לצורך שירותים אלה. ניתן לנהל את העדפות הפרסום שלך ב-
+                <a
+                  href="https://adssettings.google.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-teal-600 underline"
+                  dir="ltr"
+                >
+                  Google Ad Settings
+                </a>
+                , או לבטל מעקב פרסומי באמצעות{" "}
+                <a
+                  href="https://optout.aboutads.info"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-teal-600 underline"
+                  dir="ltr"
+                >
+                  YourAdChoices
+                </a>
+                . למידע נוסף, עיין ב
+                <a
+                  href="https://policies.google.com/privacy"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-teal-600 underline"
+                >
+                  מדיניות הפרטיות של Google
+                </a>
+                .
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-bold text-navy-900 mb-3">8. שמירת מידע</h2>
               <p>
                 אנו שומרים את המידע האישי שלך כל עוד הדבר נדרש למטרות שלשמן נאסף, וכן
                 לתקופה הנדרשת על פי חוק. מידע שאינו נדרש עוד ייחק או יימחק בהתאם
@@ -136,7 +221,7 @@ export default function PrivacyPage() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-navy-900 mb-3">8. זכויות המשתמש</h2>
+              <h2 className="text-2xl font-bold text-navy-900 mb-3">9. זכויות המשתמש</h2>
               <p>
                 בהתאם לחוק הגנת הפרטיות, התשמ"א–1981, ותיקוניו, עומדות לך הזכויות הבאות:
               </p>
@@ -168,7 +253,7 @@ export default function PrivacyPage() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-navy-900 mb-3">9. קישורים לאתרים חיצוניים</h2>
+              <h2 className="text-2xl font-bold text-navy-900 mb-3">10. קישורים לאתרים חיצוניים</h2>
               <p>
                 האתר עשוי להכיל קישורים לאתרים חיצוניים. אנו אינם אחראים למדיניות
                 הפרטיות של אתרים אלה, ומומלץ לעיין במדיניות הפרטיות שלהם בנפרד.
@@ -176,7 +261,7 @@ export default function PrivacyPage() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-navy-900 mb-3">10. שינויים במדיניות הפרטיות</h2>
+              <h2 className="text-2xl font-bold text-navy-900 mb-3">11. שינויים במדיניות הפרטיות</h2>
               <p>
                 אנו שומרים לעצמנו את הזכות לעדכן מדיניות פרטיות זו מעת לעת. שינויים
                 מהותיים יפורסמו באתר. המשך שימוש באתר לאחר פרסום השינויים מהווה הסכמה
@@ -185,7 +270,7 @@ export default function PrivacyPage() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-navy-900 mb-3">11. יצירת קשר</h2>
+              <h2 className="text-2xl font-bold text-navy-900 mb-3">12. יצירת קשר</h2>
               <p>
                 בכל שאלה, פנייה או בקשה הנוגעת למדיניות פרטיות זו, ניתן לפנות אלינו:
               </p>
