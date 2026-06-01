@@ -14,7 +14,7 @@ type LeadPayload = {
   company_website?: string; // honeypot
 };
 
-const TO_EMAIL = process.env.LEADS_TO_EMAIL || "itzhakov.marina@gmail.com";
+const TO_EMAIL = process.env.LEADS_TO_EMAIL || "alonmor101@gmail.com";
 const FROM_EMAIL =
   process.env.LEADS_FROM_EMAIL || "אלון עבודות בניה <onboarding@resend.dev>";
 const BCC_EMAIL = process.env.LEADS_BCC_EMAIL;

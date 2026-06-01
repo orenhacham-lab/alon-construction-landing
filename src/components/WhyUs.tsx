@@ -20,7 +20,7 @@ export function WhyUs() {
               היתרון שלנו
             </span>
             <h2 className="text-3xl font-extrabold leading-tight text-white sm:text-4xl">
-              למה לבחור באלון עבודות בניה?
+              למה לבחור באלון עבודות בניה בע״מ?
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-navy-100/85">
               שילוב נדיר של ניסיון הנדסי, ניהול פרויקט מסודר ויחס אישי - כך אנחנו

@@ -43,7 +43,7 @@ export function Header() {
       <div className="container-px flex h-16 items-center justify-between gap-4 lg:h-20">
         {/* לוגו */}
         <a href="#top" className="flex items-center" aria-label={COMPANY.name}>
-          <BrandLogo variant="header" imgClassName="h-9 w-auto sm:h-10 lg:h-12" />
+          <BrandLogo variant="header" imgClassName="h-11 w-auto sm:h-12 lg:h-14" />
         </a>
 
         {/* ניווט - דסקטופ */}
@@ -101,7 +101,11 @@ export function Header() {
             onClick={() => setMenuOpen((v) => !v)}
             aria-label={menuOpen ? "סגירת תפריט" : "פתיחת תפריט"}
             aria-expanded={menuOpen}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-navy-100 text-navy-800"
+            className={`inline-flex h-10 w-10 items-center justify-center rounded-xl border transition-colors ${
+              scrolled
+                ? "border-navy-100 text-navy-800"
+                : "border-white/40 text-white"
+            }`}
           >
             {menuOpen ? <CloseIcon className="h-6 w-6" /> : <MenuIcon className="h-6 w-6" />}
           </button>

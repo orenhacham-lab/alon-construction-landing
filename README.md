@@ -59,7 +59,7 @@ npm start
 | משתנה | חובה? | תיאור |
 |---|---|---|
 | `RESEND_API_KEY` | **כן** (לשליחת מיילים) | מפתח API מ־[Resend](https://resend.com/api-keys). בלעדיו הטופס יחזיר שגיאה ברורה. |
-| `LEADS_TO_EMAIL` | מומלץ | כתובת לקבלת הלידים. ברירת מחדל: `itzhakov.marina@gmail.com`. |
+| `LEADS_TO_EMAIL` | מומלץ | כתובת לקבלת הלידים. ברירת מחדל: `alonmor101@gmail.com`. |
 | `LEADS_FROM_EMAIL` | אופציונלי | כתובת השולח. ברירת מחדל לבדיקות: `onboarding@resend.dev`. בפרודקשן — כתובת מדומיין מאומת. |
 | `LEADS_BCC_EMAIL` | אופציונלי | כתובת לקבלת עותק נסתר (BCC) של כל ליד. |
 | `NEXT_PUBLIC_GTM_ID` | אופציונלי | מזהה GTM. ברירת מחדל: `GTM-K6JV8SB6`. |
@@ -83,7 +83,7 @@ npm start
 2. ייבאו את הריפו `alon-construction-landing` מ־GitHub. (Vercel יזהה אוטומטית Next.js.)
 3. לפני Deploy, פתחו **Environment Variables** והזינו לפחות:
    - `RESEND_API_KEY` = (המפתח שלכם)
-   - `LEADS_TO_EMAIL` = `itzhakov.marina@gmail.com`
+   - `LEADS_TO_EMAIL` = `alonmor101@gmail.com`
    - (אופציונלי) `LEADS_FROM_EMAIL`, `NEXT_PUBLIC_SITE_URL`, `LEADS_BCC_EMAIL`.
 4. לחצו **Deploy**. בסיום תקבלו כתובת חיה.
 5. מומלץ לעדכן את `NEXT_PUBLIC_SITE_URL` לכתובת הסופית ולפרוס מחדש (לשיפור SEO/OG).
