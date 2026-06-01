@@ -47,7 +47,7 @@ export function CookieBanner() {
       <button
         type="button"
         onClick={accept}
-        className="mt-3 w-full rounded-xl bg-teal-500 py-2 text-sm font-bold text-white transition-colors hover:bg-teal-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-teal-400"
+        className="mt-3 w-full rounded-xl bg-teal-500 py-1.5 text-xs font-bold text-white transition-colors hover:bg-teal-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-teal-400 lg:py-2 lg:text-sm"
       >
         אישור
       </button>

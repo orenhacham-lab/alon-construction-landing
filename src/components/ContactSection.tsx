@@ -10,6 +10,68 @@ const FORM_TRUST = [
   "ליווי אישי לאורך כל הדרך",
 ];
 
+/** כרטיסי יצירת קשר ישירה (טלפון / וואטסאפ / מייל / כתובת) */
+function DirectContact({ className = "" }: { className?: string }) {
+  return (
+    <div className={`grid gap-3 sm:grid-cols-2 ${className}`}>
+      <PhoneLink
+        location="contact_section"
+        withIcon={false}
+        className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-4 transition-colors hover:bg-white/10"
+      >
+        <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-teal-gradient text-white">
+          <PhoneIcon className="h-5 w-5" />
+        </span>
+        <span className="leading-tight">
+          <span className="block text-xs text-navy-100/70">חייגו אלינו</span>
+          <span className="block font-extrabold text-white" dir="ltr">
+            {COMPANY.phonePrimary}
+          </span>
+        </span>
+      </PhoneLink>
+
+      <WhatsappLink
+        location="contact_section"
+        withIcon={false}
+        className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-4 transition-colors hover:bg-white/10"
+      >
+        <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#25D366] text-white">
+          <WhatsappIcon className="h-5 w-5" />
+        </span>
+        <span className="leading-tight">
+          <span className="block text-xs text-navy-100/70">כתבו לנו</span>
+          <span className="block font-extrabold text-white">וואטסאפ</span>
+        </span>
+      </WhatsappLink>
+
+      <a
+        href={CONTACT.mailto}
+        className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-4 transition-colors hover:bg-white/10"
+      >
+        <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 text-teal-300">
+          <MailIcon className="h-5 w-5" />
+        </span>
+        <span className="leading-tight">
+          <span className="block text-xs text-navy-100/70">מייל</span>
+          <span className="block font-extrabold text-white" dir="ltr">
+            {COMPANY.email}
+          </span>
+        </span>
+      </a>
+
+      <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-4">
+        <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 text-teal-300">
+          <MapPinIcon className="h-5 w-5" />
+        </span>
+        <span className="leading-tight">
+          <span className="block text-xs text-navy-100/70">כתובת</span>
+          <span className="block font-bold text-white">{COMPANY.address}</span>
+        </span>
+      </div>
+    </div>
+  );
+}
+
 export function ContactSection() {
   return (
     <section
@@ -47,70 +109,20 @@ export function ContactSection() {
             </ul>
           </Reveal>
 
-          {/* יצירת קשר ישירה */}
-          <Reveal delay={150}>
-            <div className="mt-8 grid gap-3 sm:grid-cols-2">
-              <PhoneLink
-                location="contact_section"
-                withIcon={false}
-                className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-4 transition-colors hover:bg-white/10"
-              >
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-teal-gradient text-white">
-                  <PhoneIcon className="h-5 w-5" />
-                </span>
-                <span className="leading-tight">
-                  <span className="block text-xs text-navy-100/70">חייגו אלינו</span>
-                  <span className="block font-extrabold text-white" dir="ltr">
-                    {COMPANY.phonePrimary}
-                  </span>
-                </span>
-              </PhoneLink>
-
-              <WhatsappLink
-                location="contact_section"
-                withIcon={false}
-                className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-4 transition-colors hover:bg-white/10"
-              >
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#25D366] text-white">
-                  <WhatsappIcon className="h-5 w-5" />
-                </span>
-                <span className="leading-tight">
-                  <span className="block text-xs text-navy-100/70">כתבו לנו</span>
-                  <span className="block font-extrabold text-white">וואטסאפ</span>
-                </span>
-              </WhatsappLink>
-
-              <a
-                href={CONTACT.mailto}
-                className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-4 transition-colors hover:bg-white/10"
-              >
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 text-teal-300">
-                  <MailIcon className="h-5 w-5" />
-                </span>
-                <span className="leading-tight">
-                  <span className="block text-xs text-navy-100/70">מייל</span>
-                  <span className="block font-extrabold text-white" dir="ltr">
-                    {COMPANY.email}
-                  </span>
-                </span>
-              </a>
-
-              <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-4">
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 text-teal-300">
-                  <MapPinIcon className="h-5 w-5" />
-                </span>
-                <span className="leading-tight">
-                  <span className="block text-xs text-navy-100/70">כתובת</span>
-                  <span className="block font-bold text-white">{COMPANY.address}</span>
-                </span>
-              </div>
-            </div>
+          {/* יצירת קשר ישירה — דסקטופ בלבד (במובייל מוצג מתחת לטופס) */}
+          <Reveal delay={150} className="hidden lg:block">
+            <DirectContact className="mt-8" />
           </Reveal>
         </div>
 
         {/* טופס */}
         <Reveal delay={120}>
           <LeadForm />
+        </Reveal>
+
+        {/* יצירת קשר ישירה — מובייל בלבד, מתחת לטופס */}
+        <Reveal delay={150} className="lg:hidden">
+          <DirectContact />
         </Reveal>
       </div>
     </section>
