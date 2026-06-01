@@ -18,7 +18,7 @@ export default function AccessibilityPage() {
             הצהרת נגישות
           </h1>
           <p className="text-navy-500 text-sm mb-10">
-            עודכן לאחרונה: ינואר 2025
+            עודכן לאחרונה: יוני 2026
           </p>
 
           <div className="prose prose-lg max-w-none text-navy-700 leading-relaxed space-y-8">

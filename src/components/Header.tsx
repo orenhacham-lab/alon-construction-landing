@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { BrandLogo } from "@/components/BrandLogo";
 import { WhatsappLink, PhoneLink, ScrollToFormButton, scrollToForm } from "@/components/CtaButtons";
 import { MenuIcon, CloseIcon, PhoneIcon, WhatsappIcon } from "@/components/icons";
@@ -17,6 +18,9 @@ const NAV_LINKS = [
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+  const navHref = (href: string) => (isHome ? href : `/${href}`);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -42,7 +46,7 @@ export function Header() {
     >
       <div className="container-px flex h-16 items-center justify-between gap-4 lg:h-20">
         {/* לוגו */}
-        <a href="#top" className="flex items-center" aria-label={COMPANY.name}>
+        <a href="/" className="flex items-center" aria-label={COMPANY.name}>
           <BrandLogo variant="header" imgClassName="h-12 w-auto sm:h-14 lg:h-16" />
         </a>
 
@@ -51,7 +55,7 @@ export function Header() {
           {NAV_LINKS.map((link) => (
             <a
               key={link.href}
-              href={link.href}
+              href={navHref(link.href)}
               className="text-sm font-semibold text-navy-700 transition-colors hover:text-teal-600"
             >
               {link.label}
@@ -75,9 +79,15 @@ export function Header() {
             <WhatsappIcon className="h-5 w-5" />
             וואטסאפ
           </WhatsappLink>
-          <ScrollToFormButton className="btn btn-md btn-primary">
-            לקבלת הצעת מחיר
-          </ScrollToFormButton>
+          {isHome ? (
+            <ScrollToFormButton className="btn btn-md btn-primary">
+              לקבלת הצעת מחיר
+            </ScrollToFormButton>
+          ) : (
+            <a href="/#lead-form" className="btn btn-md btn-primary">
+              לקבלת הצעת מחיר
+            </a>
+          )}
         </div>
 
         {/* פעולות - מובייל */}
@@ -119,23 +129,33 @@ export function Header() {
             {NAV_LINKS.map((link) => (
               <a
                 key={link.href}
-                href={link.href}
+                href={navHref(link.href)}
                 onClick={() => setMenuOpen(false)}
                 className="border-b border-navy-50 py-3 text-base font-semibold text-navy-800"
               >
                 {link.label}
               </a>
             ))}
-            <button
-              type="button"
-              onClick={() => {
-                setMenuOpen(false);
-                scrollToForm();
-              }}
-              className="btn btn-lg btn-primary mt-4 w-full"
-            >
-              לקבלת הצעת מחיר
-            </button>
+            {isHome ? (
+              <button
+                type="button"
+                onClick={() => {
+                  setMenuOpen(false);
+                  scrollToForm();
+                }}
+                className="btn btn-lg btn-primary mt-4 w-full"
+              >
+                לקבלת הצעת מחיר
+              </button>
+            ) : (
+              <a
+                href="/#lead-form"
+                onClick={() => setMenuOpen(false)}
+                className="btn btn-lg btn-primary mt-4 w-full"
+              >
+                לקבלת הצעת מחיר
+              </a>
+            )}
           </nav>
         </div>
       )}

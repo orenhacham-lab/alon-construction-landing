@@ -3,7 +3,7 @@ import { Assistant } from "next/font/google";
 import "./globals.css";
 import { GtmHeadScript, GtmNoScript } from "@/components/GoogleTagManager";
 import { CookieBanner } from "@/components/CookieBanner";
-import { AccessibilityButton } from "@/components/AccessibilityButton";
+import { AccessibilityWidget } from "@/components/AccessibilityWidget";
 import { COMPANY, CONTACT } from "@/lib/constants";
 
 const assistant = Assistant({
@@ -115,7 +115,7 @@ export default function RootLayout({
         <GtmNoScript />
         {children}
         <CookieBanner />
-        <AccessibilityButton />
+        <AccessibilityWidget />
       </body>
     </html>
   );
