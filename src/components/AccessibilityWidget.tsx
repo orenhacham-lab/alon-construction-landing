@@ -41,19 +41,20 @@ function AccessibilityIcon({ className }: { className?: string }) {
   return (
     <svg
       viewBox="0 0 48 48"
-      fill="currentColor"
+      fill="none"
       className={className}
       aria-hidden="true"
     >
-      <circle cx="24" cy="24" r="22" fill="none" stroke="currentColor" strokeWidth="2.5" />
-      <circle cx="24" cy="13" r="4" />
-      <path
-        d="M24 18 L24 30 M14 23 L34 23 M24 30 L18 40 M24 30 L30 40"
-        stroke="currentColor"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        fill="none"
-      />
+      {/* טבעת חיצונית */}
+      <circle cx="24" cy="24" r="22" stroke="currentColor" strokeWidth="2.4" />
+      {/* ראש */}
+      <circle cx="24" cy="13.5" r="3.1" fill="currentColor" />
+      {/* ידיים פרושות */}
+      <path d="M12.5 20 H35.5" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" />
+      {/* גוף */}
+      <path d="M24 17.5 V27" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" />
+      {/* רגליים פסוקות */}
+      <path d="M24 27 L18.5 38 M24 27 L29.5 38" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -119,13 +120,13 @@ export function AccessibilityWidget() {
   return (
     <div
       ref={panelRef}
-      className="fixed z-[45] bottom-16 right-3 lg:bottom-6 lg:right-6"
+      className="fixed z-[45] left-3 top-1/2 -translate-y-1/2"
     >
       {open && (
         <div
           role="dialog"
           aria-label="כלי נגישות"
-          className="absolute bottom-12 right-0 w-64 rounded-2xl bg-white shadow-2xl ring-1 ring-navy-200/60 overflow-hidden"
+          className="absolute left-full top-1/2 ml-2 max-h-[85vh] w-64 -translate-y-1/2 overflow-y-auto rounded-2xl bg-white shadow-2xl ring-1 ring-navy-200/60"
         >
           <div className="flex items-center justify-between bg-navy-800 px-4 py-3">
             <span className="text-sm font-bold text-white">כלי נגישות</span>
@@ -183,14 +184,14 @@ export function AccessibilityWidget() {
         aria-label="פתיחת כלי נגישות"
         aria-expanded={open}
         className={[
-          "flex h-9 w-9 items-center justify-center rounded-full transition-all",
+          "flex h-11 w-11 items-center justify-center rounded-full transition-all duration-200",
           "focus-visible:outline focus-visible:outline-2 focus-visible:outline-teal-400",
-          "bg-white/80 text-navy-700 shadow-md ring-1 ring-navy-200/60 backdrop-blur-sm",
-          "hover:bg-white hover:text-teal-600 hover:ring-teal-400/60",
-          "lg:h-10 lg:w-10 lg:bg-white/90 lg:shadow-lg",
+          "bg-navy-500/10 text-navy-500/70 ring-1 ring-navy-500/15 backdrop-blur-sm",
+          "hover:bg-white/80 hover:text-teal-600 hover:ring-teal-400/50 hover:shadow-md",
+          open ? "bg-white/80 text-teal-600 shadow-md" : "",
         ].join(" ")}
       >
-        <AccessibilityIcon className="h-5 w-5" />
+        <AccessibilityIcon className="h-6 w-6" />
       </button>
     </div>
   );
