@@ -43,7 +43,7 @@ export function Header() {
       <div className="container-px flex h-16 items-center justify-between gap-4 lg:h-20">
         {/* לוגו */}
         <a href="#top" className="flex items-center" aria-label={COMPANY.name}>
-          <BrandLogo variant="header" imgClassName="h-11 w-auto sm:h-12 lg:h-14" />
+          <BrandLogo variant="header" imgClassName="h-12 w-auto sm:h-14 lg:h-16" />
         </a>
 
         {/* ניווט - דסקטופ */}

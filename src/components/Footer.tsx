@@ -131,7 +131,21 @@ export function Footer() {
               Go Top
             </a>
           </p>
-          <p>{COMPANY.tagline}</p>
+          <div className="flex items-center gap-4">
+            <a
+              href="/privacy"
+              className="hover:text-teal-300 transition-colors"
+            >
+              מדיניות פרטיות
+            </a>
+            <span aria-hidden="true">·</span>
+            <a
+              href="/accessibility"
+              className="hover:text-teal-300 transition-colors"
+            >
+              נגישות
+            </a>
+          </div>
         </div>
       </div>
     </footer>

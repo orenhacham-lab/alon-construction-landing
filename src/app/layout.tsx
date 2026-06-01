@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Assistant } from "next/font/google";
 import "./globals.css";
 import { GtmHeadScript, GtmNoScript } from "@/components/GoogleTagManager";
+import { CookieBanner } from "@/components/CookieBanner";
 import { COMPANY, CONTACT } from "@/lib/constants";
 
 const assistant = Assistant({
@@ -112,6 +113,7 @@ export default function RootLayout({
       <body className="font-sans">
         <GtmNoScript />
         {children}
+        <CookieBanner />
       </body>
     </html>
   );
