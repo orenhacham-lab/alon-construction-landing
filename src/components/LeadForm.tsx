@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { SERVICE_OPTIONS } from "@/lib/constants";
-import { trackLeadSubmit } from "@/lib/gtm";
+import { trackLeadSubmit, trackFormSubmitSuccess } from "@/lib/gtm";
 import { CheckCircleIcon, ArrowLeftIcon } from "@/components/icons";
 import { WhatsappLink, PhoneLink } from "@/components/CtaButtons";
 
@@ -68,8 +68,15 @@ export function LeadForm() {
       if (!res.ok || !json?.ok) {
         throw new Error(json?.error || "send failed");
       }
-      // אירוע המרה ל-dataLayer (ללא מידע רגיש)
+      // אירוע המרה קיים (backward compatibility)
       trackLeadSubmit(data.service || "unspecified");
+      // אירוע Enhanced Conversions עם user_data עבור Google Ads
+      trackFormSubmitSuccess({
+        fullName: data.fullName,
+        phone: data.phone,
+        email: data.email,
+        selectedService: data.service || "unspecified",
+      });
       setStatus("success");
     } catch {
       setStatus("error");
