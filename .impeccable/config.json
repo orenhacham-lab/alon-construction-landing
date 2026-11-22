@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "design-system-font",
+        "value": "arial",
+        "createdAt": "2026-11-22T17:02:59.214Z",
+        "reason": "agent decision: Arial is the web-safe fallback in the lead email HTML (route.ts) and the accessibility widget's readable-font option (globals.css a11y-readable-font); both intentional, not display type"
+      }
+    ]
+  }
+}
