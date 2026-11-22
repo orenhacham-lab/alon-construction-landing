@@ -143,10 +143,10 @@ export function ScheduleCompare() {
                 >
                   <span className="relative hidden h-full text-sm font-bold text-white sm:block">
                     <Swap show={!unified} delay={delay} className="px-3 leading-[2.75rem]">
-                      {e - s >= 11 ? row.contractor : ""}
+                      {row.before[1] - row.before[0] >= 11 ? row.contractor : ""}
                     </Swap>
                     <Swap show={unified} delay={delay} className="px-3 leading-[2.75rem]">
-                      {e - s >= 8 ? "אלון" : ""}
+                      {row.after[1] - row.after[0] >= 8 ? "אלון" : ""}
                     </Swap>
                   </span>
                 </span>
@@ -157,11 +157,20 @@ export function ScheduleCompare() {
 
         <div className="grid grid-cols-[6.5rem_1fr] items-center gap-4 border-t border-white/15 pt-4 sm:grid-cols-[8rem_1fr]">
           <span className="text-sm font-extrabold text-white sm:text-base">כל הפרויקט</span>
-          <div className="gm-track relative h-11 rounded-md bg-white/[0.04]">
+          <div className="gm-track relative h-11 overflow-hidden rounded-md bg-white/[0.04]">
+            <span
+              className="absolute inset-y-0 rounded-md bg-leaf transition-opacity duration-200"
+              style={{
+                insetInlineStart: 0,
+                width: `${ROWS[ROWS.length - 1].after[1]}%`,
+                opacity: unified ? 1 : 0,
+                transitionDelay: unified ? `calc(${lastDelay}ms + var(--gm-dur) * 0.8)` : "0ms",
+              }}
+            />
             {ROWS.map((row, i) => {
               const [s, e] = unified ? row.after : row.before;
               const prevEnd = i === 0 ? 0 : (unified ? ROWS[i - 1].after : ROWS[i - 1].before)[1];
-              const delay = `${i * timing.stagger}ms`;
+              const delay = `${lastDelay / 2}ms`;
               return (
                 <span key={row.trade}>
                   {i > 0 && (
@@ -179,7 +188,6 @@ export function ScheduleCompare() {
                       transitionDelay: delay,
                       ...(i === 0 && { borderStartStartRadius: "0.375rem", borderEndStartRadius: "0.375rem" }),
                       ...(i === ROWS.length - 1 && { borderStartEndRadius: "0.375rem", borderEndEndRadius: "0.375rem" }),
-                      boxShadow: unified ? "none" : "inset -1px 0 0 rgba(10,30,52,0.6), inset 1px 0 0 rgba(10,30,52,0.6)",
                     }}
                   />
                 </span>

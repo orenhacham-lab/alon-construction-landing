@@ -21,6 +21,7 @@ type Phase = "static" | "armed" | "drawn";
 function useDrawOnView<T extends HTMLElement>(threshold = 0.45) {
   const ref = useRef<T>(null);
   const [phase, setPhase] = useState<Phase>("static");
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
@@ -28,6 +29,9 @@ function useDrawOnView<T extends HTMLElement>(threshold = 0.45) {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     if (el.getBoundingClientRect().top < window.innerHeight * 0.85) return;
     setPhase("armed");
+    let raf = requestAnimationFrame(() => {
+      raf = requestAnimationFrame(() => setReady(true));
+    });
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -38,10 +42,13 @@ function useDrawOnView<T extends HTMLElement>(threshold = 0.45) {
       { threshold },
     );
     io.observe(el);
-    return () => io.disconnect();
+    return () => {
+      io.disconnect();
+      cancelAnimationFrame(raf);
+    };
   }, [threshold]);
 
-  return { ref, phase };
+  return { ref, phase, ready };
 }
 
 const byY = (cs: Callout[]) => [...cs].sort((a, b) => a.y - b.y);
@@ -72,7 +79,7 @@ function CalloutPin({ callout, index }: { callout: Callout; index: number }) {
         style={{ transitionDelay: `${beat}ms` }}
       />
       <span
-        className="gm-leader absolute top-0 block h-px bg-white shadow-[0_1px_2px_rgba(10,30,52,0.4)]"
+        className="gm-leader absolute -top-px block h-[1.5px] bg-navy-900/75 shadow-[0_0_0_1px_rgba(255,255,255,0.55)]"
         style={{
           width: len,
           [toLeft ? "right" : "left"]: 7,
@@ -162,10 +169,10 @@ export function AnnotatedImage({
   mobileSrc?: string;
   mobileCallouts?: Callout[];
 }) {
-  const { ref, phase } = useDrawOnView<HTMLDivElement>();
+  const { ref, phase, ready } = useDrawOnView<HTMLDivElement>();
   const phoneCallouts = mobileCallouts ?? callouts;
   return (
-    <div ref={ref} data-armed={phase === "armed"} data-ready={phase !== "static"}>
+    <div ref={ref} data-armed={phase === "armed"} data-ready={ready}>
       <div className={`relative overflow-hidden ${className}`}>
         <picture>
           {mobileSrc && <source media="(max-width: 767px)" srcSet={mobileSrc} />}
