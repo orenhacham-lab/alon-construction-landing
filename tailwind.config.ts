@@ -50,6 +50,14 @@ const config: Config = {
           light: "#46C795",
         },
         ink: "#1B2733",
+        // גווני טיח ואבן - דף עבודות גמר
+        plaster: {
+          50: "#F8F5F2",
+          100: "#F1ECE7",
+          200: "#E4DCD4",
+          300: "#CFC4BA",
+          600: "#7A6C62",
+        },
       },
       boxShadow: {
         soft: "0 2px 8px -2px rgba(15, 42, 71, 0.08), 0 6px 24px -8px rgba(15, 42, 71, 0.12)",

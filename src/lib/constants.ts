@@ -42,6 +42,28 @@ export const SERVICE_OPTIONS = [
 
 export type ServiceValue = (typeof SERVICE_OPTIONS)[number]["value"];
 
+export type ServiceOption = { readonly value: string; readonly label: string };
+
+/** דף עבודות גמר: הודעת וואטסאפ וסוגי פנייה */
+export const GMAR_WHATSAPP_URL = `https://wa.me/${CONTACT.whatsappNumber}?text=${encodeURIComponent(
+  "היי, הגעתי מהאתר ואשמח לתאם פגישה בשטח לגבי עבודות גמר.",
+)}`;
+
+export const GMAR_SERVICE_OPTIONS = [
+  { value: "finishing_full", label: "עבודות גמר לבית שלם" },
+  { value: "gypsum", label: "עבודות גבס ותקרות" },
+  { value: "flooring", label: "ריצוף וחיפוי" },
+  { value: "woodwork", label: "פרגולה, דק או גדר עץ" },
+  { value: "structure_finish", label: "שלד וגמר בפרויקט אחד" },
+  { value: "renovation", label: "שיפוץ כללי" },
+  { value: "other", label: "אחר" },
+] as const;
+
+export const ALL_SERVICE_OPTIONS: readonly ServiceOption[] = [
+  ...SERVICE_OPTIONS,
+  ...GMAR_SERVICE_OPTIONS,
+];
+
 /** כרטיסי שירותים */
 export const SERVICES = [
   {

@@ -175,3 +175,67 @@ html.a11y-readable-font * {
     animation: none !important;
   }
 }
+
+/* ===== דף עבודות גמר ===== */
+.gm-page ::selection {
+  background: rgba(28, 163, 184, 0.22);
+  color: #0a1e34;
+}
+.gm-page {
+  scrollbar-color: #4e769f #f1ece7;
+}
+.gm-ease {
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+.gm-leader {
+  transform: scaleX(1);
+  transition: transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.gm-label {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+  transition:
+    opacity 600ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 600ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+[data-armed="true"] .gm-leader {
+  transform: scaleX(0);
+}
+[data-armed="true"] .gm-label {
+  opacity: 0;
+  filter: blur(6px);
+  transform: translateY(4px);
+}
+.gm-bar {
+  transition:
+    inset-inline-start 1100ms cubic-bezier(0.16, 1, 0.3, 1),
+    width 1100ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 600ms ease;
+}
+.gm-gap {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(238, 243, 248, 0.16) 0 2px,
+    transparent 2px 7px
+  );
+  transition: opacity 500ms ease;
+}
+.gm-faq summary::-webkit-details-marker {
+  display: none;
+}
+.gm-faq summary {
+  list-style: none;
+}
+.gm-faq[open] .gm-faq-icon {
+  transform: rotate(45deg);
+}
+@media (prefers-reduced-motion: reduce) {
+  .gm-leader,
+  .gm-label,
+  .gm-bar,
+  .gm-gap {
+    transition: none !important;
+  }
+}

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { SERVICE_OPTIONS } from "@/lib/constants";
+import { SERVICE_OPTIONS, WHATSAPP_URL, type ServiceOption } from "@/lib/constants";
 import { trackLeadSubmit, trackFormSubmitSuccess } from "@/lib/gtm";
 import { CheckCircleIcon, ArrowLeftIcon } from "@/components/icons";
 import { WhatsappLink, PhoneLink } from "@/components/CtaButtons";
@@ -31,7 +31,17 @@ const EMPTY: FormState = {
 const inputClass =
   "w-full rounded-xl border border-navy-200 bg-white px-4 py-3 text-navy-900 placeholder:text-navy-300 transition-colors focus:border-teal-500 focus:bg-white";
 
-export function LeadForm() {
+export function LeadForm({
+  serviceOptions = SERVICE_OPTIONS,
+  messagePlaceholder = "ספרו לנו בקצרה על המבנה ועל מה שמטריד אתכם...",
+  whatsappHref = WHATSAPP_URL,
+  submitLabel = "שליחת הפרטים",
+}: {
+  serviceOptions?: readonly ServiceOption[];
+  messagePlaceholder?: string;
+  whatsappHref?: string;
+  submitLabel?: string;
+} = {}) {
   const [data, setData] = useState<FormState>(EMPTY);
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
   const [status, setStatus] = useState<Status>("idle");
@@ -97,7 +107,7 @@ export function LeadForm() {
           לקצר תהליכים? אפשר לפנות אלינו ישירות:
         </p>
         <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
-          <WhatsappLink location="form_success" className="btn btn-md btn-whatsapp">
+          <WhatsappLink location="form_success" href={whatsappHref} className="btn btn-md btn-whatsapp">
             דברו איתנו בוואטסאפ
           </WhatsappLink>
           <PhoneLink location="form_success" className="btn btn-md btn-navy">
@@ -207,7 +217,7 @@ export function LeadForm() {
             }}
           >
             <option value="">בחרו את סוג הפנייה</option>
-            {SERVICE_OPTIONS.map((opt) => (
+            {serviceOptions.map((opt) => (
               <option key={opt.value} value={opt.value}>
                 {opt.label}
               </option>
@@ -221,7 +231,7 @@ export function LeadForm() {
           <textarea
             name="message"
             rows={4}
-            placeholder="ספרו לנו בקצרה על המבנה ועל מה שמטריד אתכם..."
+            placeholder={messagePlaceholder}
             value={data.message}
             onChange={(e) => update("message", e.target.value)}
             className={`${inputClass} resize-y`}
@@ -247,7 +257,7 @@ export function LeadForm() {
           </>
         ) : (
           <>
-            שליחת הפרטים
+            {submitLabel}
             <ArrowLeftIcon className="h-5 w-5 transition-transform group-hover:-translate-x-1" />
           </>
         )}

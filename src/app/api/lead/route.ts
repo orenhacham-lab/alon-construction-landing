@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { SERVICE_OPTIONS } from "@/lib/constants";
+import { ALL_SERVICE_OPTIONS } from "@/lib/constants";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -30,7 +30,7 @@ function escapeHtml(value: string): string {
 
 function serviceLabel(value?: string): string {
   if (!value) return "לא צוין";
-  return SERVICE_OPTIONS.find((o) => o.value === value)?.label || value;
+  return ALL_SERVICE_OPTIONS.find((o) => o.value === value)?.label || value;
 }
 
 function buildHtml(lead: Required<Pick<LeadPayload, "fullName" | "phone">> & LeadPayload) {

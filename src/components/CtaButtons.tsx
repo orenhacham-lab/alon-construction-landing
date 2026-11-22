@@ -11,15 +11,17 @@ export function WhatsappLink({
   className = "",
   location = "general",
   withIcon = true,
+  href = WHATSAPP_URL,
 }: {
   children: ReactNode;
   className?: string;
   location?: string;
   withIcon?: boolean;
+  href?: string;
 }) {
   return (
     <a
-      href={WHATSAPP_URL}
+      href={href}
       target="_blank"
       rel="noopener noreferrer"
       onClick={() => trackWhatsappClick(location)}
