@@ -42,6 +42,11 @@ const FLOOR_CALLOUTS: Callout[] = [
   { x: 42.4, y: 68, label: "קו רובה ישר ואחיד", side: "right", length: 70 },
 ];
 
+const FLOOR_CALLOUTS_PHONE: Callout[] = [
+  { x: 70, y: 57.6, label: "פאנל תואם לריצוף", side: "left" },
+  { x: 21.6, y: 67, label: "קו רובה ישר ואחיד", side: "right" },
+];
+
 const CITIES = [
   "מודיעין",
   "שוהם",
@@ -407,7 +412,9 @@ function Walkthrough() {
             src="/images/gmar/porcelain-floor.jpg"
             alt="ריצוף בפורמט גדול עם קווי רובה ישרים ואחידים ופאנל תואם לאורך הקיר"
             callouts={FLOOR_CALLOUTS}
-            className="aspect-[3/1] rounded-2xl"
+            mobileSrc="/images/gmar/porcelain-floor-m.jpg"
+            mobileCallouts={FLOOR_CALLOUTS_PHONE}
+            className="aspect-[2/1] rounded-2xl md:aspect-[3/1]"
           >
             <SimulationTag />
           </AnnotatedImage>
@@ -663,7 +670,7 @@ function ContactRow({
 
 function Faq() {
   return (
-    <section aria-labelledby="faq-title" className="bg-white py-20 lg:py-28">
+    <section aria-labelledby="faq-title" className="bg-plaster-100 py-20 lg:py-28">
       <div className={`${container} grid gap-10 lg:grid-cols-12 lg:gap-16`}>
         <h2
           id="faq-title"
@@ -671,9 +678,9 @@ function Faq() {
         >
           שאלות שאנחנו שומעים בפגישה הראשונה
         </h2>
-        <div className="border-t border-plaster-200 lg:col-span-7">
+        <div className="border-t border-plaster-300 lg:col-span-7">
           {FAQ.map((f) => (
-            <details key={f.q} className="gm-faq group border-b border-plaster-200">
+            <details key={f.q} className="gm-faq group border-b border-plaster-300">
               <summary className="flex cursor-pointer items-center justify-between gap-6 py-5 text-lg font-bold text-navy-900 transition-colors hover:text-navy-600">
                 {f.q}
                 <span

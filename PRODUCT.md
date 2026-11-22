@@ -37,6 +37,15 @@ Visitors arrive mostly from Google Ads on mobile. The process: on-site meeting a
 - Real structural projects with photos in `public/images/projects/` (Neot Golf Caesarea, Azorei Chen TLV, Balfour 2 TLV). These are restoration projects, not finishing work.
 - No testimonials, review counts, project counts or years-in-business figures confirmed. Do not invent them.
 - Finishing-work imagery: user approved AI-generated images that represent the work; they must not be presented as specific completed client projects.
+- Client copy document for the finishing-works page (Word file supplied by the user in the build session, November 2026). Verbatim claims it makes, which the page may use:
+  - "כשקבלן אחד אחראי על כל שלבי העבודה, העבודה מתקדמת מהר יותר, מדויקת יותר, ופחות דברים נופלים בין הכיסאות."
+  - "שיפוץ או בנייה מערבים הרבה בעלי מקצוע: קבלן שלד, גבסן, רצף, נגר, צבעי."
+  - "אלון עבודות בניה מבצעת בעצמה את כל שלבי הפרויקט."
+  - "כשאותו צוות בונה את השלד ומבצע את הגמר, כל שלב מתוכנן מראש עם השלב שאחריו."
+  - "ובסוף, עוברים יחד על כל פרט לפני המסירה, כי עבודה נגמרת רק כשאתם מרוצים ממנה."
+  - "שיפוע ריצוף לא מדויק, תקרת גבס עקומה או פרגולה שלא מחזיקה מעמד, אלה דברים שרואים כל יום."
+  - "עבודות גמר בכל אזור המרכז", followed by the city list above.
+  - Contact: mobile 054-6217217, phone 08-9221011, alonmor101@gmail.com, מושב חדיד 180.
 
 ## Product Principles
 - Accountability over volume: the single-contractor promise is the reason to call.

@@ -146,6 +146,8 @@ export function AnnotatedImage({
   priority = false,
   mobilePins = true,
   legendClassName = "",
+  mobileSrc,
+  mobileCallouts,
 }: {
   src: string;
   alt: string;
@@ -156,19 +158,26 @@ export function AnnotatedImage({
   priority?: boolean;
   mobilePins?: boolean;
   legendClassName?: string;
+  /** תמונה וקואורדינטות נפרדות למסכים צרים (מתחת ל-md) */
+  mobileSrc?: string;
+  mobileCallouts?: Callout[];
 }) {
   const { ref, phase } = useDrawOnView<HTMLDivElement>();
+  const phoneCallouts = mobileCallouts ?? callouts;
   return (
     <div ref={ref} data-armed={phase === "armed"} data-ready={phase !== "static"}>
       <div className={`relative overflow-hidden ${className}`}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={src}
-          alt={alt}
-          loading={priority ? "eager" : "lazy"}
-          decoding="async"
-          className={`block h-full w-full object-cover ${imgClassName}`}
-        />
+        <picture>
+          {mobileSrc && <source media="(max-width: 767px)" srcSet={mobileSrc} />}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={src}
+            alt={alt}
+            loading={priority ? "eager" : "lazy"}
+            decoding="async"
+            className={`block h-full w-full object-cover ${imgClassName}`}
+          />
+        </picture>
         {callouts.length > 0 && (
           <>
             <div className="absolute inset-0 hidden md:block">
@@ -176,7 +185,7 @@ export function AnnotatedImage({
             </div>
             {mobilePins && (
               <div className="absolute inset-0 md:hidden">
-                <NumberedPins callouts={callouts} />
+                <NumberedPins callouts={phoneCallouts} />
               </div>
             )}
           </>
@@ -184,7 +193,7 @@ export function AnnotatedImage({
         {children}
       </div>
       {mobilePins && callouts.length > 0 && (
-        <CalloutLegend callouts={callouts} className={`mt-3 md:hidden ${legendClassName}`} />
+        <CalloutLegend callouts={phoneCallouts} className={`mt-3 md:hidden ${legendClassName}`} />
       )}
     </div>
   );
