@@ -1,36 +1,58 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 
-type Row = { trade: string; contractor: string; before: [number, number]; after: [number, number] };
+type Span = [number, number];
+type Row = { trade: string; contractor: string; before: Span; after: Span };
 
 const ROWS: Row[] = [
-  { trade: "שלד", contractor: "קבלן שלד", before: [0, 20], after: [0, 20] },
-  { trade: "גבס", contractor: "גבסן", before: [27, 43], after: [20, 34] },
-  { trade: "ריצוף", contractor: "רצף", before: [51, 67], after: [34, 50] },
-  { trade: "עבודות עץ", contractor: "נגר", before: [74, 86], after: [50, 62] },
-  { trade: "צבע וגימורים", contractor: "צבעי", before: [91, 100], after: [62, 72] },
+  { trade: "שלד", contractor: "קבלן שלד", before: [0, 18], after: [0, 18] },
+  { trade: "גבס", contractor: "גבסן", before: [28, 44], after: [18, 32] },
+  { trade: "ריצוף", contractor: "רצף", before: [53, 69], after: [32, 48] },
+  { trade: "עבודות עץ", contractor: "נגר", before: [77, 88], after: [48, 59] },
+  { trade: "צבע וגימורים", contractor: "צבעי", before: [94, 100], after: [59, 70] },
 ];
+
+const BLUE = "#4E769F";
+const LEAF = "#2FAE7E";
+
+/** מהירויות: מיזוג אוטומטי אחד ארוך, לחיצות קצרות, חזרה אחורה מהירה מכולן */
+const TIMING = {
+  auto: { dur: 1100, stagger: 90 },
+  click: { dur: 520, stagger: 40 },
+  back: { dur: 380, stagger: 30 },
+};
 
 export function ScheduleCompare() {
   const [unified, setUnified] = useState(false);
+  const [timing, setTiming] = useState(TIMING.auto);
   const touched = useRef(false);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setUnified(true);
+      return;
+    }
     const el = ref.current;
     if (!el) return;
-    let timer: ReturnType<typeof setTimeout>;
+    let timer: ReturnType<typeof setTimeout> | undefined;
     const io = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !touched.current) {
+        if (touched.current) return;
+        if (entry.intersectionRatio >= 0.6) {
           timer = setTimeout(() => {
-            if (!touched.current) setUnified(true);
-          }, 1300);
-          io.disconnect();
+            if (touched.current) return;
+            setTiming(TIMING.auto);
+            setUnified(true);
+            touched.current = true;
+            io.disconnect();
+          }, 500);
+        } else {
+          clearTimeout(timer);
         }
       },
-      { threshold: 0.6 },
+      { threshold: [0, 0.6] },
     );
     io.observe(el);
     return () => {
@@ -41,18 +63,30 @@ export function ScheduleCompare() {
 
   function choose(v: boolean) {
     touched.current = true;
+    if (v === unified) return;
+    setTiming(v ? TIMING.click : TIMING.back);
     setUnified(v);
   }
 
+  const lastDelay = (ROWS.length - 1) * timing.stagger;
   const end = unified ? ROWS[ROWS.length - 1].after[1] : 100;
+  const vars = { "--gm-dur": `${timing.dur}ms` } as CSSProperties;
 
   return (
-    <div ref={ref}>
+    <div ref={ref} style={vars}>
       <div
         role="group"
         aria-label="השוואת לוחות זמנים"
-        className="inline-flex rounded-full border border-white/15 bg-white/5 p-1"
+        className="relative inline-grid grid-cols-2 rounded-full border border-white/15 bg-white/5 p-1"
       >
+        <span
+          aria-hidden="true"
+          className="gm-ease absolute inset-y-1 right-1 w-[calc(50%-0.25rem)] rounded-full transition-[transform,background-color] duration-200"
+          style={{
+            transform: unified ? "translateX(-100%)" : "translateX(0)",
+            backgroundColor: unified ? LEAF : "#fff",
+          }}
+        />
         {[
           { v: false, label: "חמישה קבלנים" },
           { v: true, label: "קבלן אחד" },
@@ -62,12 +96,8 @@ export function ScheduleCompare() {
             type="button"
             aria-pressed={unified === o.v}
             onClick={() => choose(o.v)}
-            className={`gm-ease rounded-full px-5 py-2 text-sm font-bold transition-[background-color,color,box-shadow] duration-500 ${
-              unified === o.v
-                ? o.v
-                  ? "bg-leaf text-white shadow-[0_6px_18px_-6px_rgba(47,174,126,0.7)]"
-                  : "bg-white text-navy-900"
-                : "text-navy-100 hover:text-white"
+            className={`relative z-10 rounded-full px-5 py-2 text-sm font-bold transition-colors duration-150 ${
+              unified === o.v ? (o.v ? "text-white" : "text-navy-900") : "text-navy-100 hover:text-white"
             }`}
           >
             {o.label}
@@ -75,70 +105,133 @@ export function ScheduleCompare() {
         ))}
       </div>
 
-      <div className="mt-8 space-y-3" aria-live="polite">
-        <p className="sr-only">
-          {unified
-            ? "קבלן אחד: חמשת השלבים רצים ברצף אחד, בלי המתנה בין צוות לצוות."
-            : "חמישה קבלנים: בין כל שלב לשלב יש תקופת המתנה."}
-        </p>
+      <p className="sr-only" aria-live="polite">
+        {unified
+          ? "קבלן אחד: חמשת השלבים רצים ברצף אחד, בלי המתנה בין צוות לצוות, והמסירה מוקדמת יותר."
+          : "חמישה קבלנים: בין כל שלב לשלב יש תקופת המתנה."}
+      </p>
+
+      <div className="mt-8 space-y-3" aria-hidden="true">
         {ROWS.map((row, i) => {
           const [s, e] = unified ? row.after : row.before;
           const prevEnd = i === 0 ? 0 : (unified ? ROWS[i - 1].after : ROWS[i - 1].before)[1];
+          const delay = `${i * timing.stagger}ms`;
           return (
             <div key={row.trade} className="grid grid-cols-[6.5rem_1fr] items-center gap-4 sm:grid-cols-[8rem_1fr]">
               <span className="text-sm font-semibold leading-tight text-navy-100 sm:text-base">
                 {row.trade}
-                <span className="block text-xs font-medium text-navy-300 sm:hidden">
-                  {unified ? "אלון" : row.contractor}
+                <span className="relative block h-4 text-xs font-medium text-navy-300 sm:hidden">
+                  <Swap show={!unified} delay={delay}>{row.contractor}</Swap>
+                  <Swap show={unified} delay={delay}>אלון</Swap>
                 </span>
               </span>
-              <div className="relative h-11 rounded-md bg-white/[0.04]">
+              <div className="gm-track relative h-11 rounded-md bg-white/[0.04]">
                 {i > 0 && (
                   <span
                     className="gm-gap absolute inset-y-1.5 rounded-sm"
-                    style={{
-                      insetInlineStart: `${prevEnd}%`,
-                      width: `${Math.max(s - prevEnd, 0)}%`,
-                      opacity: unified ? 0 : 1,
-                    }}
+                    style={{ insetInlineStart: `${prevEnd}%`, width: `${Math.max(s - prevEnd, 0)}%`, transitionDelay: delay }}
                   />
                 )}
                 <span
-                  className="gm-bar absolute inset-y-0 flex items-center overflow-hidden rounded-md px-3 text-xs font-bold text-white sm:text-sm"
+                  className="gm-bar absolute inset-y-0 overflow-hidden rounded-md"
                   style={{
                     insetInlineStart: `${s}%`,
                     width: `${e - s}%`,
-                    backgroundColor: unified ? "#2FAE7E" : "#4E769F",
-                    transitionDelay: `${i * 90}ms`,
+                    backgroundColor: unified ? LEAF : BLUE,
+                    transitionDelay: delay,
                   }}
                 >
-                  <span className="hidden truncate sm:inline">{unified ? "אלון" : row.contractor}</span>
+                  <span className="relative hidden h-full text-sm font-bold text-white sm:block">
+                    <Swap show={!unified} delay={delay} className="px-3 leading-[2.75rem]">
+                      {e - s >= 11 ? row.contractor : ""}
+                    </Swap>
+                    <Swap show={unified} delay={delay} className="px-3 leading-[2.75rem]">
+                      {e - s >= 8 ? "אלון" : ""}
+                    </Swap>
+                  </span>
                 </span>
               </div>
             </div>
           );
         })}
 
-        <div className="grid grid-cols-[6.5rem_1fr] gap-4 pt-2 sm:grid-cols-[8rem_1fr]">
+        <div className="grid grid-cols-[6.5rem_1fr] items-center gap-4 border-t border-white/15 pt-4 sm:grid-cols-[8rem_1fr]">
+          <span className="text-sm font-extrabold text-white sm:text-base">כל הפרויקט</span>
+          <div className="gm-track relative h-11 rounded-md bg-white/[0.04]">
+            {ROWS.map((row, i) => {
+              const [s, e] = unified ? row.after : row.before;
+              const prevEnd = i === 0 ? 0 : (unified ? ROWS[i - 1].after : ROWS[i - 1].before)[1];
+              const delay = `${i * timing.stagger}ms`;
+              return (
+                <span key={row.trade}>
+                  {i > 0 && (
+                    <span
+                      className="gm-gap absolute inset-y-1.5"
+                      style={{ insetInlineStart: `${prevEnd}%`, width: `${Math.max(s - prevEnd, 0)}%`, transitionDelay: delay }}
+                    />
+                  )}
+                  <span
+                    className="gm-bar absolute inset-y-0"
+                    style={{
+                      insetInlineStart: `${s}%`,
+                      width: `${e - s}%`,
+                      backgroundColor: unified ? LEAF : BLUE,
+                      transitionDelay: delay,
+                      ...(i === 0 && { borderStartStartRadius: "0.375rem", borderEndStartRadius: "0.375rem" }),
+                      ...(i === ROWS.length - 1 && { borderStartEndRadius: "0.375rem", borderEndEndRadius: "0.375rem" }),
+                      boxShadow: unified ? "none" : "inset -1px 0 0 rgba(10,30,52,0.6), inset 1px 0 0 rgba(10,30,52,0.6)",
+                    }}
+                  />
+                </span>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-[6.5rem_1fr] gap-4 sm:grid-cols-[8rem_1fr]">
           <span />
-          <div className="relative h-10 border-t border-white/15">
-            <span className="gm-bar absolute top-0 h-full w-0" style={{ insetInlineStart: `${end}%` }}>
-              <span className="absolute left-0 -top-[18rem] h-[18rem] w-px bg-teal-400/70" />
-              <span
-                className={`absolute top-1.5 whitespace-nowrap text-xs font-bold text-teal-300 ${
-                  unified ? "right-0 translate-x-1/2" : "left-1"
-                }`}
-              >
+          <div className="relative h-8">
+            <span
+              className="gm-bar absolute -top-[22rem] bottom-0 w-0"
+              style={{ insetInlineStart: `${end}%`, transitionDelay: `${lastDelay}ms` }}
+            >
+              <span className="absolute left-0 top-0 h-[calc(100%-1.5rem)] w-px bg-teal-400/70" />
+              <span className="absolute bottom-1 left-1.5 whitespace-nowrap text-xs font-bold text-teal-300">
                 מסירה
               </span>
             </span>
-            <span className="absolute top-1.5 text-xs text-navy-200" style={{ insetInlineStart: 0 }}>
+            <span className="absolute bottom-1 text-xs text-navy-200" style={{ insetInlineStart: 0 }}>
               התחלה
             </span>
           </div>
         </div>
       </div>
-      <p className="mt-2 text-xs text-navy-300">המחשה של עיקרון העבודה, לא נתונים של פרויקט מסוים.</p>
+      <p className="mt-3 text-xs text-navy-300">המחשה של עיקרון העבודה, לא נתונים של פרויקט מסוים.</p>
     </div>
+  );
+}
+
+/** החלפת תווית אחרי שרוב התנועה הסתיימה */
+function Swap({
+  show,
+  delay,
+  className = "",
+  children,
+}: {
+  show: boolean;
+  delay: string;
+  className?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <span
+      className={`gm-swap absolute inset-0 block truncate ${className}`}
+      style={{
+        opacity: show ? 1 : 0,
+        transitionDelay: show ? `calc(${delay} + var(--gm-dur) * 0.6)` : `calc(${delay} + var(--gm-dur) * 0.5)`,
+      }}
+    >
+      {children}
+    </span>
   );
 }

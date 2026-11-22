@@ -36,11 +36,19 @@ export function LeadForm({
   messagePlaceholder = "ספרו לנו בקצרה על המבנה ועל מה שמטריד אתכם...",
   whatsappHref = WHATSAPP_URL,
   submitLabel = "שליחת הפרטים",
+  cityPlaceholder = "לדוגמה: תל אביב",
+  serviceLabel = "סוג הפנייה",
+  servicePlaceholder = "בחרו את סוג הפנייה",
+  successText = "קיבלנו את הפרטים שלכם ונחזור אליכם בהקדם לשיחה מקצועית ראשונית. רוצים לקצר תהליכים? אפשר לפנות אלינו ישירות:",
 }: {
   serviceOptions?: readonly ServiceOption[];
   messagePlaceholder?: string;
   whatsappHref?: string;
   submitLabel?: string;
+  cityPlaceholder?: string;
+  serviceLabel?: string;
+  servicePlaceholder?: string;
+  successText?: string;
 } = {}) {
   const [data, setData] = useState<FormState>(EMPTY);
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
@@ -103,8 +111,7 @@ export function LeadForm({
           תודה! הפנייה התקבלה
         </h3>
         <p className="mx-auto mt-3 max-w-md leading-relaxed text-navy-600">
-          קיבלנו את הפרטים שלכם ונחזור אליכם בהקדם לשיחה מקצועית ראשונית. רוצים
-          לקצר תהליכים? אפשר לפנות אלינו ישירות:
+          {successText}
         </p>
         <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
           <WhatsappLink location="form_success" href={whatsappHref} className="btn btn-md btn-whatsapp">
@@ -196,7 +203,7 @@ export function LeadForm({
             type="text"
             name="city"
             autoComplete="address-level2"
-            placeholder="לדוגמה: תל אביב"
+            placeholder={cityPlaceholder}
             value={data.city}
             onChange={(e) => update("city", e.target.value)}
             className={inputClass}
@@ -205,7 +212,7 @@ export function LeadForm({
       </div>
 
       <div className="mt-4">
-        <Field label="סוג הפנייה">
+        <Field label={serviceLabel}>
           <select
             name="service"
             value={data.service}
@@ -216,7 +223,7 @@ export function LeadForm({
                 "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%231C3E63' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E\")",
             }}
           >
-            <option value="">בחרו את סוג הפנייה</option>
+            <option value="">{servicePlaceholder}</option>
             {serviceOptions.map((opt) => (
               <option key={opt.value} value={opt.value}>
                 {opt.label}

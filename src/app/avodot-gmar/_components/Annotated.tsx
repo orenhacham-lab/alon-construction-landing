@@ -11,21 +11,27 @@ export type Callout = {
   length?: number;
 };
 
-/** עוטף שממתין לכניסה למסך ואז "משרטט" את קווי ההפניה */
-export function useDrawOnView<T extends HTMLElement>(threshold = 0.35) {
+type Phase = "static" | "armed" | "drawn";
+
+/**
+ * "משרטט" את ההערות כשהתמונה נכנסת למסך.
+ * תמונה שכבר נראית בטעינה נשארת סטטית; המעברים מופעלים רק אחרי ההסתרה,
+ * כך שאין "מחיקה" נראית של הקווים בזמן ההידרציה.
+ */
+function useDrawOnView<T extends HTMLElement>(threshold = 0.45) {
   const ref = useRef<T>(null);
-  const [armed, setArmed] = useState(false);
+  const [phase, setPhase] = useState<Phase>("static");
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     if (el.getBoundingClientRect().top < window.innerHeight * 0.85) return;
-    setArmed(true);
+    setPhase("armed");
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setArmed(false);
+          setPhase("drawn");
           io.disconnect();
         }
       },
@@ -35,13 +41,15 @@ export function useDrawOnView<T extends HTMLElement>(threshold = 0.35) {
     return () => io.disconnect();
   }, [threshold]);
 
-  return { ref, armed };
+  return { ref, phase };
 }
+
+const byY = (cs: Callout[]) => [...cs].sort((a, b) => a.y - b.y);
 
 export function CalloutLayer({ callouts }: { callouts: Callout[] }) {
   return (
     <>
-      {callouts.map((c, i) => (
+      {byY(callouts).map((c, i) => (
         <CalloutPin key={c.label} callout={c} index={i} />
       ))}
     </>
@@ -51,7 +59,7 @@ export function CalloutLayer({ callouts }: { callouts: Callout[] }) {
 function CalloutPin({ callout, index }: { callout: Callout; index: number }) {
   const len = callout.length ?? 72;
   const toLeft = callout.side === "left";
-  const delay = `${180 + index * 160}ms`;
+  const beat = index * 90;
 
   return (
     <div
@@ -59,26 +67,72 @@ function CalloutPin({ callout, index }: { callout: Callout; index: number }) {
       style={{ left: `${callout.x}%`, top: `${callout.y}%` }}
       aria-hidden="true"
     >
-      <span className="absolute -left-[7px] -top-[7px] block h-[14px] w-[14px] rounded-full border-[3px] border-white bg-teal-500 shadow-[0_2px_8px_rgba(10,30,52,0.35)]" />
+      <span
+        className="gm-pin absolute -left-[7px] -top-[7px] block h-[14px] w-[14px] rounded-full border-[3px] border-white bg-teal-500 shadow-[0_2px_8px_rgba(10,30,52,0.35)]"
+        style={{ transitionDelay: `${beat}ms` }}
+      />
       <span
         className="gm-leader absolute top-0 block h-px bg-white shadow-[0_1px_2px_rgba(10,30,52,0.4)]"
         style={{
           width: len,
           [toLeft ? "right" : "left"]: 7,
           transformOrigin: toLeft ? "right center" : "left center",
-          transitionDelay: delay,
+          transitionDelay: `${beat + 120}ms`,
         }}
       />
       <span
         className="gm-label absolute -top-[15px] whitespace-nowrap rounded-md bg-white/95 px-2.5 py-1.5 text-[13px] font-bold leading-none text-navy-900 shadow-[0_4px_14px_-4px_rgba(10,30,52,0.35)]"
         style={{
           [toLeft ? "right" : "left"]: len + 10,
-          transitionDelay: `calc(${delay} + 420ms)`,
+          transitionDelay: `${beat + 370}ms`,
         }}
       >
         {callout.label}
       </span>
     </div>
+  );
+}
+
+/** מובייל: נקודות ממוספרות על התמונה ומקרא מתחתיה */
+function NumberedPins({ callouts }: { callouts: Callout[] }) {
+  return (
+    <>
+      {byY(callouts).map((c, i) => (
+        <span
+          key={c.label}
+          aria-hidden="true"
+          className="gm-pin absolute flex h-6 w-6 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-white bg-teal-500 text-[12px] font-extrabold tabular-nums text-white shadow-[0_2px_8px_rgba(10,30,52,0.4)]"
+          style={{ left: `${c.x}%`, top: `${c.y}%`, transitionDelay: `${i * 90}ms` }}
+        >
+          {i + 1}
+        </span>
+      ))}
+    </>
+  );
+}
+
+export function CalloutLegend({ callouts, className = "" }: { callouts: Callout[]; className?: string }) {
+  return (
+    <ol className={`flex flex-wrap gap-x-5 gap-y-2 text-[14px] font-semibold text-navy-800 ${className}`}>
+      {byY(callouts).map((c, i) => (
+        <li key={c.label} className="flex items-center gap-2">
+          <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-teal-500 text-[11px] font-extrabold tabular-nums text-white">
+            {i + 1}
+          </span>
+          {c.label}
+        </li>
+      ))}
+    </ol>
+  );
+}
+
+export function SimulationTag({ className = "" }: { className?: string }) {
+  return (
+    <span
+      className={`absolute bottom-2.5 left-3 rounded bg-navy-950/60 px-2 py-1 text-[11px] font-semibold leading-none text-white backdrop-blur-sm ${className}`}
+    >
+      הדמיה להמחשה
+    </span>
   );
 }
 
@@ -90,6 +144,8 @@ export function AnnotatedImage({
   imgClassName = "",
   children,
   priority = false,
+  mobilePins = true,
+  legendClassName = "",
 }: {
   src: string;
   alt: string;
@@ -98,22 +154,38 @@ export function AnnotatedImage({
   imgClassName?: string;
   children?: ReactNode;
   priority?: boolean;
+  mobilePins?: boolean;
+  legendClassName?: string;
 }) {
-  const { ref, armed } = useDrawOnView<HTMLDivElement>();
+  const { ref, phase } = useDrawOnView<HTMLDivElement>();
   return (
-    <div ref={ref} data-armed={armed} className={`relative overflow-hidden ${className}`}>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={src}
-        alt={alt}
-        loading={priority ? "eager" : "lazy"}
-        decoding="async"
-        className={`block h-full w-full object-cover ${imgClassName}`}
-      />
-      <div className="absolute inset-0 hidden md:block">
-        <CalloutLayer callouts={callouts} />
+    <div ref={ref} data-armed={phase === "armed"} data-ready={phase !== "static"}>
+      <div className={`relative overflow-hidden ${className}`}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={src}
+          alt={alt}
+          loading={priority ? "eager" : "lazy"}
+          decoding="async"
+          className={`block h-full w-full object-cover ${imgClassName}`}
+        />
+        {callouts.length > 0 && (
+          <>
+            <div className="absolute inset-0 hidden md:block">
+              <CalloutLayer callouts={callouts} />
+            </div>
+            {mobilePins && (
+              <div className="absolute inset-0 md:hidden">
+                <NumberedPins callouts={callouts} />
+              </div>
+            )}
+          </>
+        )}
+        {children}
       </div>
-      {children}
+      {mobilePins && callouts.length > 0 && (
+        <CalloutLegend callouts={callouts} className={`mt-3 md:hidden ${legendClassName}`} />
+      )}
     </div>
   );
 }

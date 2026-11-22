@@ -187,18 +187,20 @@ html.a11y-readable-font * {
 .gm-ease {
   transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
 }
-.gm-leader {
-  transform: scaleX(1);
-  transition: transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+
+/* הערות על תמונות: המעברים פעילים רק אחרי שהתמונה "נדרכה" */
+[data-ready="true"] .gm-leader {
+  transition: transform 520ms cubic-bezier(0.16, 1, 0.3, 1);
 }
-.gm-label {
-  opacity: 1;
-  filter: blur(0);
-  transform: translateY(0);
+[data-ready="true"] .gm-label {
   transition:
-    opacity 600ms cubic-bezier(0.16, 1, 0.3, 1),
-    filter 600ms cubic-bezier(0.16, 1, 0.3, 1),
-    transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 420ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 420ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+[data-armed="true"] .gm-pin {
+  opacity: 0;
+  scale: 0.6;
 }
 [data-armed="true"] .gm-leader {
   transform: scaleX(0);
@@ -208,34 +210,56 @@ html.a11y-readable-font * {
   filter: blur(6px);
   transform: translateY(4px);
 }
-.gm-bar {
+[data-ready="true"] .gm-pin {
   transition:
-    inset-inline-start 1100ms cubic-bezier(0.16, 1, 0.3, 1),
-    width 1100ms cubic-bezier(0.16, 1, 0.3, 1),
-    background-color 600ms ease;
+    opacity 160ms ease-out,
+    scale 160ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* לוח הזמנים */
+.gm-track {
+  contain: layout paint;
+}
+.gm-bar,
+.gm-gap {
+  transition-property: inset-inline-start, width, background-color;
+  transition-duration: var(--gm-dur, 500ms);
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
 }
 .gm-gap {
   background-image: repeating-linear-gradient(
     -45deg,
-    rgba(238, 243, 248, 0.16) 0 2px,
+    rgba(238, 243, 248, 0.2) 0 2px,
     transparent 2px 7px
   );
-  transition: opacity 500ms ease;
 }
+.gm-swap {
+  transition: opacity 150ms ease-out;
+}
+
 .gm-faq summary::-webkit-details-marker {
   display: none;
 }
 .gm-faq summary {
   list-style: none;
 }
+.gm-faq-icon {
+  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
 .gm-faq[open] .gm-faq-icon {
   transform: rotate(45deg);
 }
+
 @media (prefers-reduced-motion: reduce) {
-  .gm-leader,
-  .gm-label,
-  .gm-bar,
-  .gm-gap {
-    transition: none !important;
+  .gm-page *,
+  .gm-page *::before,
+  .gm-page *::after {
+    transition-duration: 0ms !important;
+    transition-delay: 0ms !important;
+  }
+  .gm-page a:hover,
+  .gm-page a:active,
+  .gm-page button:active {
+    transform: none !important;
   }
 }

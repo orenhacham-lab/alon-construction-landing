@@ -1,18 +1,18 @@
-import { Fragment } from "react";
 import type { Metadata } from "next";
 import { BrandLogo } from "@/components/BrandLogo";
 import { LeadForm } from "@/components/LeadForm";
 import { WhatsappLink, PhoneLink } from "@/components/CtaButtons";
 import { PhoneIcon, WhatsappIcon, MailIcon, MapPinIcon } from "@/components/icons";
 import { COMPANY, CONTACT, GMAR_SERVICE_OPTIONS, GMAR_WHATSAPP_URL } from "@/lib/constants";
-import { AnnotatedImage, CalloutLayer, type Callout } from "./_components/Annotated";
+import { AnnotatedImage, CalloutLayer, SimulationTag, type Callout } from "./_components/Annotated";
+import { MobileBar } from "./_components/MobileBar";
 import { ScheduleCompare } from "./_components/ScheduleCompare";
 import { PergolaDrawing } from "./_components/PergolaDrawing";
 
 export const metadata: Metadata = {
   title: "עבודות גמר במרכז | קבלן אחד לכל שלבי הבנייה",
   description:
-    "עבודות גמר, גבס, ריצוף, עבודות עץ ושלד בביצוע של קבלן אחד. קבלן רשום 27094, פיקוח צמוד של הנדסאי בניין ומנהל עבודה, אחריות מלאה. מודיעין, שוהם, פתח תקווה, ראשון לציון ובכל אזור המרכז.",
+    "עבודות גמר, גבס, ריצוף, עבודות עץ ושלד בביצוע של קבלן אחד. קבלן רשום 27094, פיקוח צמוד של הנדסאי בניין ומנהל עבודה, אחריות מלאה. לבתים ודירות במודיעין, שוהם, פתח תקווה, ראשון לציון ובכל אזור המרכז.",
   alternates: { canonical: "/avodot-gmar" },
   openGraph: {
     title: "עבודות גמר במרכז | קבלן אחד לכל שלבי הבנייה",
@@ -28,7 +28,7 @@ const OFFICE_TEL = "tel:089221011";
 const HERO_CALLOUTS: Callout[] = [
   { x: 40, y: 23.5, label: "קרניז גבס לתאורה נסתרת", side: "left", length: 64 },
   { x: 46, y: 36, label: "נישה בגבס עם ספוטים", side: "left", length: 120 },
-  { x: 52, y: 79, label: "ריצוף פורצלן בפורמט גדול", side: "left", length: 90 },
+  { x: 52, y: 79, label: "ריצוף בפורמט גדול", side: "left", length: 90 },
 ];
 
 const GYPSUM_CALLOUTS: Callout[] = [
@@ -38,8 +38,8 @@ const GYPSUM_CALLOUTS: Callout[] = [
 ];
 
 const FLOOR_CALLOUTS: Callout[] = [
-  { x: 46, y: 62, label: "קו רובה ישר ואחיד", side: "right", length: 70 },
-  { x: 74, y: 30, label: "פאנל תואם לריצוף", side: "left", length: 60 },
+  { x: 68.3, y: 49, label: "פאנל תואם לריצוף", side: "left", length: 64 },
+  { x: 42.4, y: 68, label: "קו רובה ישר ואחיד", side: "right", length: 70 },
 ];
 
 const CITIES = [
@@ -62,11 +62,11 @@ const CITIES = [
 const STEPS = [
   {
     title: "פגישה בשטח",
-    text: "מגיעים לנכס, מקשיבים למה שאתם רוצים, מודדים ומציעים פתרונות שמותאמים לבית שלכם.",
+    text: "מגיעים אליכם, לבית או לדירה, מקשיבים למה שאתם רוצים, מודדים ומציעים פתרונות מותאמים.",
   },
   {
     title: "הצעת מחיר מפורטת",
-    text: "כל הסעיפים וכל החומרים כתובים, יחד עם לוח זמנים שאנחנו מתחייבים אליו.",
+    text: "כל הסעיפים וכל החומרים מפורטים, יחד עם לוח זמנים שאנחנו מתחייבים אליו.",
   },
   {
     title: "ביצוע בפיקוח צמוד",
@@ -118,11 +118,11 @@ export default function FinishingWorksPage() {
         <Quality />
         <Process />
         <Areas />
-        <Contact />
         <Faq />
+        <Contact />
       </main>
       <GmarFooter />
-      <MobileBar />
+      <MobileBar whatsappHref={GMAR_WHATSAPP_URL} watchId="hero-actions-mobile" />
     </div>
   );
 }
@@ -140,7 +140,7 @@ function GmarHeader() {
             withIcon={false}
             className="hidden items-center gap-2 rounded-full px-4 py-2.5 text-[15px] font-bold text-navy-800 transition-colors hover:bg-plaster-100 sm:inline-flex"
           >
-            <PhoneIcon className="h-4 w-4 text-teal-600" />
+            <PhoneIcon className="h-4 w-4 text-navy-500" />
             <span dir="ltr">{COMPANY.phonePrimary}</span>
           </PhoneLink>
           <WhatsappLink
@@ -186,7 +186,7 @@ function HeroActions({ light = false }: { light?: boolean }) {
       </div>
       <a
         href="#lead-form"
-        className="mt-4 inline-block text-[15px] font-semibold text-navy-700 underline decoration-teal-500/60 decoration-2 underline-offset-[6px] transition-colors hover:text-navy-900 hover:decoration-teal-500"
+        className="mt-4 inline-block text-[15px] font-semibold text-navy-700 underline decoration-navy-300 decoration-2 underline-offset-[6px] transition-colors hover:text-navy-900 hover:decoration-navy-700"
       >
         מעדיפים שנחזור אליכם? השאירו פרטים
       </a>
@@ -216,7 +216,7 @@ function Hero() {
   );
   const sub = (
     <p className="mt-5 text-[17px] leading-[1.7] text-navy-700 sm:text-lg xl:text-[clamp(1rem,1.15vw,1.15rem)]">
-      גבס, ריצוף, עבודות עץ ושלד, בביצוע של צוות אחד. כשמי שבנה את הקירות הוא גם מי שסוגר
+      גבס, ריצוף, עבודות עץ ושלד, בביצוע של צוות אחד. כשמי שבנה את הקירות הוא גם מי שמנמיך
       את התקרה ומרצף את הרצפה, העבודה מתקדמת מהר יותר, מדויקת יותר, ושום דבר לא נופל בין
       הכיסאות.
     </p>
@@ -252,26 +252,26 @@ function Hero() {
           </div>
           <TrustLine />
         </div>
-        <p className="absolute bottom-3 left-4 text-[11px] font-medium text-white/80">הדמיה להמחשה</p>
+        <SimulationTag className="bottom-4 left-4" />
       </div>
 
       {/* מובייל וטאבלט */}
       <div className="xl:hidden">
-        <div className="relative aspect-[4/3] max-h-[52svh] w-full overflow-hidden sm:aspect-[16/9]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/images/gmar/living-room-sm.jpg"
-            alt="סלון בבית פרטי אחרי עבודות גמר: תקרת גבס עם תאורה נסתרת, נישה לטלוויזיה וריצוף פורצלן"
-            className="h-full w-full object-cover object-[42%_50%]"
-            fetchPriority="high"
-          />
-          <p className="absolute bottom-2 left-3 text-[11px] font-medium text-white/85">הדמיה להמחשה</p>
-        </div>
+        <AnnotatedImage
+          src="/images/gmar/living-room-sm.jpg"
+          alt="סלון בבית פרטי אחרי עבודות גמר: תקרת גבס עם תאורה נסתרת, נישה לטלוויזיה וריצוף בפורמט גדול"
+          callouts={HERO_CALLOUTS}
+          priority
+          className="aspect-[1920/1088] w-full"
+          legendClassName={`${container} !mt-0 border-b border-plaster-200 bg-white py-3`}
+        >
+          <SimulationTag />
+        </AnnotatedImage>
         <div className={`${container} pb-12 pt-8 sm:pb-16 sm:pt-10`}>
           <div className="max-w-2xl">
             {headline}
             {sub}
-            <div className="mt-7">
+            <div className="mt-7" id="hero-actions-mobile">
               <HeroActions />
             </div>
             <TrustLine />
@@ -291,7 +291,9 @@ function OneContractor() {
             id="one-title"
             className="text-[2rem] font-extrabold leading-[1.15] tracking-[-0.015em] text-white sm:text-[2.6rem]"
           >
-            חמישה בעלי מקצוע. חמישה לוחות זמנים. ומי שמתאם ביניהם, זה אתם.
+            <span className="block">חמישה בעלי מקצוע.</span>
+            <span className="block">חמישה לוחות זמנים.</span>
+            <span className="block">ומי שמתאם ביניהם, זה אתם.</span>
           </h2>
           <p className="mt-6 max-w-[36rem] text-[17px] leading-[1.75] text-navy-100">
             קבלן שלד, גבסן, רצף, נגר וצבעי. כשכל אחד מהם עובד לעצמו, אתם מנהלים את התיאומים,
@@ -345,7 +347,7 @@ function Chapter({
       <ul className="mt-6 max-w-[38rem] divide-y divide-plaster-200 border-y border-plaster-200">
         {items.map((it) => (
           <li key={it} className="flex items-center gap-3 py-3 text-[15px] font-semibold text-navy-800">
-            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-teal-500" aria-hidden="true" />
+            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-navy-300" aria-hidden="true" />
             {it}
           </li>
         ))}
@@ -367,24 +369,28 @@ function Walkthrough() {
           </h2>
           <p className="text-[17px] leading-[1.75] text-navy-700 lg:col-span-5 lg:col-start-8 lg:pt-3">
             אחרי שהשלד עומד, מתחיל השלב שאתם באמת רואים ומרגישים: תקרות, רצפות, נישות, תאורה,
-            עץ וכל הפרטים הקטנים שיוצרים תחושה של מקום שלם. בואו נעבור על הבית, חדר אחרי חדר.
+            עץ וכל הפרטים הקטנים שיוצרים תחושה של מקום שלם. בואו נעבור על הבית, מהתקרה ועד החצר.
           </p>
         </div>
       </div>
 
       {/* גבס */}
       <div className={`${container} grid items-center gap-10 py-14 lg:grid-cols-12 lg:gap-16 lg:py-20`}>
+        <div className="lg:col-span-7">
         <AnnotatedImage
           src="/images/gmar/gypsum-ceiling.jpg"
           alt="תקרת גבס מונמכת עם קרניז לתאורה נסתרת ונישה עם ספוטים שקועים"
           callouts={GYPSUM_CALLOUTS}
-          className="aspect-[4/3] rounded-2xl lg:col-span-7"
-        />
+          className="aspect-[4/3] rounded-2xl"
+        >
+          <SimulationTag />
+        </AnnotatedImage>
+        </div>
         <div className="lg:col-span-5">
           <Chapter
             id="ch-gypsum"
             title="גבס: התקרה שנותנת לחדר אופי."
-            text="הגבס הוא הכלי שמעניק לחלל אופי. הנמכת תקרות, תאורה נסתרת, נישות לארונות ולטלוויזיה, מזנונים, תקרות אקוסטיות ועיצובים דקורטיביים, כל אלה נותנים לכל חדר מראה מחושב ומסודר."
+            text="הנמכת תקרות, תאורה נסתרת, נישות לארונות ולטלוויזיה, מזנונים, תקרות אקוסטיות ועיצובים דקורטיביים. כך כל חדר מקבל מראה מחושב ומסודר."
             items={[
               "הנמכת תקרות וקרניזים לתאורה נסתרת",
               "נישות לטלוויזיה ולארונות, מזנונים",
@@ -399,10 +405,12 @@ function Walkthrough() {
         <div className={container}>
           <AnnotatedImage
             src="/images/gmar/porcelain-floor.jpg"
-            alt="ריצוף פורצלן בפורמט גדול עם קווי רובה ישרים ואחידים"
+            alt="ריצוף בפורמט גדול עם קווי רובה ישרים ואחידים ופאנל תואם לאורך הקיר"
             callouts={FLOOR_CALLOUTS}
-            className="aspect-[16/9] rounded-2xl sm:aspect-[8/3]"
-          />
+            className="aspect-[3/1] rounded-2xl"
+          >
+            <SimulationTag />
+          </AnnotatedImage>
           <div className="mt-10 grid gap-8 lg:grid-cols-12">
             <div className="lg:col-span-7">
               <Chapter
@@ -410,7 +418,7 @@ function Walkthrough() {
                 title="ריצוף: מתחיל בתשתית, נגמר בקו רובה ישר."
                 text="קרמיקה, פרקט, אבן, שיש או בטון מחוק ללא מרצפות. כל ריצוף מתחיל בשכבת תשתית נכונה ומסתיים בקו רובה ישר. אנחנו מרצפים בתים חדשים, מחליפים ריצוף קיים ומבצעים ריצוף וחיפוי בחדרי רחצה."
                 items={[
-                  "קרמיקה, פורצלן, פרקט, אבן ושיש",
+                  "קרמיקה, פרקט, אבן ושיש",
                   "בטון מחוק ללא מרצפות",
                   "ריצוף וחיפוי בחדרי רחצה, החלפת ריצוף קיים",
                 ]}
@@ -426,8 +434,8 @@ function Walkthrough() {
           <div className="lg:col-span-5">
             <Chapter
               id="ch-wood"
-              title="עץ: המקום שבו הבית פוגש את החוץ."
-              text="פרגולות, דקים, גדרות וגגונים שמתוכננים במיוחד לבית שלכם. החצר והמרפסת מקבלות את אותה תשומת לב כמו הסלון."
+              title="עץ: החצר והמרפסת, באותה רמת גמר."
+              text="פרגולות, דקים, גדרות וגגונים שמתוכננים במיוחד לבית שלכם. המקום שבו הבית פוגש את החוץ מקבל את אותה תשומת לב כמו הסלון."
               items={["פרגולות וגגונים", "דקים מעץ", "גדרות עץ"]}
             />
           </div>
@@ -457,7 +465,7 @@ function Walkthrough() {
               id="ch-structure"
               className="text-[1.75rem] font-extrabold leading-[1.15] tracking-[-0.015em] text-white sm:text-[2.15rem]"
             >
-              שלד ושיפוצים: אותו צוות בונה, ואותו צוות מגמר.
+              שלד ושיפוצים: אותו צוות בונה ומבצע את הגמר.
             </h3>
             <p className="mt-4 max-w-[38rem] text-[17px] leading-[1.75] text-navy-100">
               יסודות, קירות, עמודים ותקרות בבטון, ברזל ובלוקים, וגם שיפוצים כלליים ושיקום מבנים
@@ -467,7 +475,7 @@ function Walkthrough() {
             <ul className="mt-6 max-w-[38rem] divide-y divide-white/10 border-y border-white/10">
               {["יסודות, קירות, עמודים ותקרות", "שיפוצים כלליים", "שיקום מבנים קיימים"].map((it) => (
                 <li key={it} className="flex items-center gap-3 py-3 text-[15px] font-semibold text-navy-50">
-                  <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-teal-400" aria-hidden="true" />
+                  <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-navy-400" aria-hidden="true" />
                   {it}
                 </li>
               ))}
@@ -488,7 +496,9 @@ function Quality() {
             id="quality-title"
             className="text-[2rem] font-extrabold leading-[1.15] tracking-[-0.015em] text-navy-900 sm:text-[2.6rem]"
           >
-            שיפוע ריצוף לא מדויק. תקרת גבס עקומה. פרגולה שלא מחזיקה מעמד.
+            <span className="block">שיפוע ריצוף לא מדויק.</span>
+            <span className="block">תקרת גבס עקומה.</span>
+            <span className="block">פרגולה שלא מחזיקה מעמד.</span>
           </h2>
           <p className="mt-6 max-w-[38rem] text-[17px] leading-[1.75] text-navy-700">
             את הטעויות האלה רואים כל יום, כי עבודות הגמר הן השלב שבו הכי קל לטעות. לכן כל עבודת
@@ -504,7 +514,7 @@ function Quality() {
             ["תקן", "ביצוע בהתאם לתקן הישראלי"],
           ].map(([k, v]) => (
             <div key={k} className="grid grid-cols-[7.5rem_1fr] gap-4 border-t border-plaster-200 py-5 last:border-b">
-              <dt className="text-sm font-bold text-teal-700">{k}</dt>
+              <dt className="text-sm font-bold text-navy-500">{k}</dt>
               <dd className="text-[17px] font-semibold text-navy-900">{v}</dd>
             </div>
           ))}
@@ -527,8 +537,12 @@ function Process() {
         <ol className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
           {STEPS.map((s, i) => (
             <li key={s.title} className="relative border-t-2 border-navy-800 pt-6">
-              <span className="text-sm font-bold tabular-nums text-teal-700">שלב {i + 1}</span>
-              <h3 className="mt-2 text-xl font-extrabold text-navy-900">{s.title}</h3>
+              <h3 className="flex items-baseline gap-3 text-xl font-extrabold text-navy-900">
+                <span className="text-[2.5rem] font-extrabold leading-none tabular-nums text-navy-300" aria-hidden="true">
+                  {i + 1}
+                </span>
+                {s.title}
+              </h3>
               <p className="mt-3 text-[16px] leading-[1.7] text-navy-700">{s.text}</p>
             </li>
           ))}
@@ -550,21 +564,21 @@ function Areas() {
             עבודות גמר בכל אזור המרכז
           </h2>
           <p className="mt-4 flex items-center gap-2 text-[16px] font-semibold text-navy-700">
-            <MapPinIcon className="h-5 w-5 text-teal-600" />
+            <MapPinIcon className="h-5 w-5 text-navy-500" />
             המשרד שלנו במושב חדיד
           </p>
         </div>
-        <p className="text-[1.35rem] font-bold leading-[1.9] text-navy-800 sm:text-[1.6rem] lg:col-span-8">
-          {CITIES.map((c, i) => (
-            <Fragment key={c}>
-              <span className="whitespace-nowrap">
+        <div className="lg:col-span-8">
+          <ul className="flex flex-wrap gap-x-6 gap-y-3 text-[1.3rem] font-bold text-navy-800 sm:text-[1.55rem]">
+            {CITIES.map((c) => (
+              <li key={c} className="flex items-center gap-2.5 whitespace-nowrap">
+                <span className="h-1.5 w-1.5 rounded-full bg-navy-300" aria-hidden="true" />
                 {c}
-                {i < CITIES.length - 1 && <span className="ms-2.5 text-teal-500">·</span>}
-              </span>{" "}
-            </Fragment>
-          ))}
-          <span className="text-navy-500">ובכל הישובים שבסביבה.</span>
-        </p>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-4 text-[1.15rem] font-semibold text-navy-500">ובכל היישובים שבסביבה.</p>
+        </div>
       </div>
     </section>
   );
@@ -582,7 +596,7 @@ function Contact() {
             יש לכם פרויקט? נשמח לשמוע עליו.
           </h2>
           <p className="mt-5 max-w-md text-[17px] leading-[1.75] text-navy-100">
-            ספרו לנו מה אתם מתכננים, ונגיע אליכם לפגישת היכרות ומדידה.
+            ספרו לנו מה אתם מתכננים, ונגיע אליכם לפגישה בשטח ומדידה.
           </p>
           <ul className="mt-10 space-y-1 border-t border-white/15">
             <ContactRow icon={<PhoneIcon className="h-5 w-5" />} label="נייד">
@@ -618,6 +632,10 @@ function Contact() {
             whatsappHref={GMAR_WHATSAPP_URL}
             messagePlaceholder="ספרו לנו בקצרה על הבית ועל העבודות שאתם מתכננים..."
             submitLabel="תיאום פגישה בשטח"
+            cityPlaceholder="לדוגמה: מודיעין"
+            serviceLabel="איזו עבודה אתם צריכים?"
+            servicePlaceholder="בחרו סוג עבודה"
+            successText="קיבלנו את הפרטים ונחזור אליכם בהקדם לתיאום פגישה בשטח. רוצים לקצר תהליכים? אפשר לפנות אלינו ישירות:"
           />
         </div>
       </div>
@@ -636,7 +654,7 @@ function ContactRow({
 }) {
   return (
     <li className="flex items-center gap-4 border-b border-white/15 py-4">
-      <span className="text-teal-400">{icon}</span>
+      <span className="text-navy-300">{icon}</span>
       <span className="w-20 text-sm text-navy-200">{label}</span>
       <span className="text-[17px] font-bold text-white">{children}</span>
     </li>
@@ -649,21 +667,21 @@ function Faq() {
       <div className={`${container} grid gap-10 lg:grid-cols-12 lg:gap-16`}>
         <h2
           id="faq-title"
-          className="text-[2rem] font-extrabold leading-[1.15] tracking-[-0.015em] text-navy-900 sm:text-[2.6rem] lg:col-span-4"
+          className="text-[2rem] font-extrabold leading-[1.15] tracking-[-0.015em] text-navy-900 sm:text-[2.6rem] lg:col-span-5"
         >
           שאלות שאנחנו שומעים בפגישה הראשונה
         </h2>
-        <div className="border-t border-plaster-200 lg:col-span-8">
+        <div className="border-t border-plaster-200 lg:col-span-7">
           {FAQ.map((f) => (
             <details key={f.q} className="gm-faq group border-b border-plaster-200">
-              <summary className="flex cursor-pointer items-center justify-between gap-6 py-5 text-lg font-bold text-navy-900 transition-colors hover:text-teal-700">
+              <summary className="flex cursor-pointer items-center justify-between gap-6 py-5 text-lg font-bold text-navy-900 transition-colors hover:text-navy-600">
                 {f.q}
                 <span
-                  className="gm-faq-icon gm-ease relative h-5 w-5 shrink-0 transition-transform duration-500"
+                  className="gm-faq-icon relative h-5 w-5 shrink-0"
                   aria-hidden="true"
                 >
-                  <span className="absolute left-0 top-1/2 h-0.5 w-5 -translate-y-1/2 rounded bg-teal-600" />
-                  <span className="absolute left-1/2 top-0 h-5 w-0.5 -translate-x-1/2 rounded bg-teal-600" />
+                  <span className="absolute left-0 top-1/2 h-0.5 w-5 -translate-y-1/2 rounded bg-navy-800" />
+                  <span className="absolute left-1/2 top-0 h-5 w-0.5 -translate-x-1/2 rounded bg-navy-800" />
                 </span>
               </summary>
               <p className="max-w-[44rem] pb-6 text-[17px] leading-[1.75] text-navy-700">{f.a}</p>
@@ -690,29 +708,5 @@ function GmarFooter() {
         </nav>
       </div>
     </footer>
-  );
-}
-
-function MobileBar() {
-  return (
-    <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 border-t border-navy-100 bg-white shadow-[0_-4px_20px_-6px_rgba(15,42,71,0.18)] lg:hidden">
-      <WhatsappLink
-        location="gmar_mobile_bar"
-        href={GMAR_WHATSAPP_URL}
-        withIcon={false}
-        className="flex items-center justify-center gap-2 bg-[#25D366] py-3.5 font-bold text-white"
-      >
-        <WhatsappIcon className="h-5 w-5" />
-        וואטסאפ
-      </WhatsappLink>
-      <PhoneLink
-        location="gmar_mobile_bar"
-        withIcon={false}
-        className="flex items-center justify-center gap-2 bg-navy-800 py-3.5 font-bold text-white"
-      >
-        <PhoneIcon className="h-5 w-5" />
-        התקשרו
-      </PhoneLink>
-    </div>
   );
 }

@@ -19,7 +19,7 @@ STORY: Visitor sees the finished room they want, understands one company did eve
 
 FIRST VIEWPORT: Full-bleed living room image (dropped gypsum ceiling, teal-white cove line, porcelain floor). Headline set large at the start edge over a navy scrim band, sub-line, primary WhatsApp + phone actions in the first viewport, three spec callouts pinned to the ceiling, floor and niche with thin leader lines. Trust line under actions.
 
-FORM: Room walkthrough, position 4 on my list, dealt lead. Raise from "one schedule" (position 3): a scroll-driven bar chart where five fragmented contractor bars collapse into one continuous bar. seed: e54f787ef754533934888ad99717dc26-ref (surface roll, dealt 4,5,3)
+FORM: Room walkthrough, position 4 on my list, dealt lead. Raise from "one schedule" (position 3): a scroll-driven bar chart where five fragmented contractor bars collapse into one continuous bar. seed:75098ad97fd9116e (surface roll, dealt 4,5,3)
 
 SIGNATURE: callout leaders draw in as each room enters; schedule bars merge on scroll. Reduced motion shows final states.
 
