@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-22T00:00:00Z",
+  "title": "Design System: אלון עבודות בניה",
+  "extensions": {
+    "colorMeta": {
+      "navy": { "role": "primary", "displayName": "Architectural Navy", "canonical": "#0F2A47", "tonalRamp": ["#06121F", "#0A1E34", "#0F2A47", "#1C3E63", "#2E567F", "#4E769F", "#7E9FC2", "#AEC5DC", "#D6E2EE", "#EEF3F8"] },
+      "navy-deep": { "role": "primary", "displayName": "Deep Navy", "canonical": "#0A1E34" },
+      "navy-night": { "role": "primary", "displayName": "Night Navy", "canonical": "#06121F" },
+      "navy-400": { "role": "primary", "displayName": "Schedule Blue", "canonical": "#4E769F" },
+      "teal": { "role": "secondary", "displayName": "Light-Line Teal", "canonical": "#1CA3B8", "tonalRamp": ["#0B2F3A", "#1B4856", "#19697A", "#188297", "#1CA3B8", "#34C2D6", "#67D9E8", "#A2EBF4", "#CFF6FB", "#ECFCFF"] },
+      "leaf": { "role": "tertiary", "displayName": "One-Contractor Leaf", "canonical": "#2FAE7E", "tonalRamp": ["#0E3527", "#155A41", "#1F8160", "#2FAE7E", "#46C795", "#7DDAB4", "#B5EBD4", "#E3F8EF"] },
+      "leaf-light": { "role": "tertiary", "displayName": "Leaf Light", "canonical": "#46C795" },
+      "whatsapp": { "role": "secondary", "displayName": "WhatsApp Green", "canonical": "#25D366" },
+      "ink": { "role": "neutral", "displayName": "Ink", "canonical": "#1B2733" },
+      "white": { "role": "neutral", "displayName": "Gallery White", "canonical": "#FFFFFF" },
+      "plaster-100": { "role": "neutral", "displayName": "Warm Plaster", "canonical": "#F1ECE7", "tonalRamp": ["#3D3631", "#5C514A", "#7A6C62", "#A3958A", "#CFC4BA", "#E4DCD4", "#F1ECE7", "#F8F5F2"] },
+      "plaster-50": { "role": "neutral", "displayName": "Drawing Paper", "canonical": "#F8F5F2" },
+      "plaster-200": { "role": "neutral", "displayName": "Plaster Rule", "canonical": "#E4DCD4" },
+      "plaster-300": { "role": "neutral", "displayName": "Plaster Border", "canonical": "#CFC4BA" },
+      "plaster-600": { "role": "neutral", "displayName": "Stone Grey", "canonical": "#7A6C62" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "The single h1, hand-broken into short lines; 2.35rem mobile, 3rem sm, fluid at xl." },
+      "headline": { "displayName": "Headline", "purpose": "Section h2s, often one sentence per line; 2rem mobile to 2.6rem." },
+      "title": { "displayName": "Title", "purpose": "Walkthrough chapter h3s; 1.75rem mobile to 2.15rem." },
+      "body": { "displayName": "Body", "purpose": "Paragraphs, 36 to 44rem max width." },
+      "label": { "displayName": "Label", "purpose": "Ruled list items, trust line, contact rows, button text." },
+      "callout": { "displayName": "Callout", "purpose": "Photo callout labels." }
+    },
+    "shadows": [
+      { "name": "pin-lift", "value": "0 2px 8px rgba(10,30,52,0.35)", "purpose": "Callout pins on photographs." },
+      { "name": "label-lift", "value": "0 4px 14px -4px rgba(10,30,52,0.35)", "purpose": "Callout labels on photographs." },
+      { "name": "leader-halo", "value": "0 0 0 1px rgba(255,255,255,0.55)", "purpose": "White edge on navy leader lines." },
+      { "name": "whatsapp-glow", "value": "0 12px 28px -10px rgba(37,211,102,0.75)", "purpose": "Hero WhatsApp button." },
+      { "name": "mobile-bar", "value": "0 -4px 20px -6px rgba(15,42,71,0.18)", "purpose": "Fixed mobile action bar." },
+      { "name": "soft", "value": "0 2px 8px -2px rgba(15,42,71,0.08), 0 6px 24px -8px rgba(15,42,71,0.12)", "purpose": "Homepage navy and white buttons." },
+      { "name": "card", "value": "0 4px 18px -6px rgba(15,42,71,0.12), 0 12px 40px -12px rgba(15,42,71,0.14)", "purpose": "Homepage cards, lead form success card." },
+      { "name": "card-hover", "value": "0 10px 30px -8px rgba(15,42,71,0.20), 0 24px 60px -16px rgba(28,163,184,0.18)", "purpose": "Lead form card; card hover." },
+      { "name": "cta", "value": "0 10px 25px -6px rgba(28,163,184,0.45)", "purpose": "Teal primary button glow." }
+    ],
+    "motion": [
+      { "name": "ease-gm", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Finishing-works easing for buttons, callouts, schedule bars, FAQ icon." },
+      { "name": "ease-reveal", "value": "cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "Homepage scroll reveal (700ms, 28px rise)." },
+      { "name": "callout-pin", "value": "160ms", "purpose": "Pin fade and scale in; 90ms stagger per callout." },
+      { "name": "callout-leader", "value": "520ms", "purpose": "Leader scales out from pin, 120ms after its pin." },
+      { "name": "callout-label", "value": "420ms", "purpose": "Label resolves from 6px blur, 370ms after its pin." },
+      { "name": "schedule-auto", "value": "1100ms / 90ms stagger", "purpose": "One-time merge 500ms after 60% visible." },
+      { "name": "schedule-click", "value": "520ms / 40ms stagger", "purpose": "Toggle to one contractor." },
+      { "name": "schedule-back", "value": "380ms / 30ms stagger", "purpose": "Toggle back to five contractors." },
+      { "name": "button-lift", "value": "300ms, translateY(-2px), active scale 0.98", "purpose": "Finishing-works CTA hover and press." },
+      { "name": "reduced-motion", "value": "transition-duration 0ms", "purpose": "All finishing-works transitions; final states shown." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" },
+      { "name": "2xl", "value": "1536px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "WhatsApp Button",
+      "kind": "button",
+      "refersTo": "button-whatsapp",
+      "description": "Primary contact action on every surface.",
+      "html": "<a class=\"ds-btn-wa\" href=\"#\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.3.1.2.1.6-.1 1.1Z\"/></svg>תיאום פגישה בשטח בוואטסאפ</a>",
+      "css": ".ds-btn-wa { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: #25D366; color: #fff; padding: 16px 24px; border-radius: 12px; font-family: Assistant, system-ui, sans-serif; font-size: 17px; font-weight: 700; text-decoration: none; box-shadow: 0 12px 28px -10px rgba(37,211,102,0.75); transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-btn-wa:hover { transform: translateY(-2px); } .ds-btn-wa:active { transform: scale(0.98); } .ds-btn-wa:focus-visible { outline: none; box-shadow: 0 0 0 2px #fff, 0 0 0 4px #1CA3B8; }"
+    },
+    {
+      "name": "Navy Phone Button",
+      "kind": "button",
+      "refersTo": "button-navy",
+      "description": "Phone action paired with WhatsApp.",
+      "html": "<a class=\"ds-btn-navy\" href=\"#\"><span dir=\"ltr\">054-6217217</span></a>",
+      "css": ".ds-btn-navy { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: #0F2A47; color: #fff; padding: 16px 24px; border-radius: 12px; font-family: Assistant, system-ui, sans-serif; font-size: 17px; font-weight: 700; text-decoration: none; transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-btn-navy:hover { transform: translateY(-2px); } .ds-btn-navy:active { transform: scale(0.98); } .ds-btn-navy:focus-visible { outline: none; box-shadow: 0 0 0 2px #fff, 0 0 0 4px #1CA3B8; }"
+    },
+    {
+      "name": "Lead Form Submit",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one teal button: submits the lead form.",
+      "html": "<button class=\"ds-btn-primary\" type=\"button\">תיאום פגישה בשטח</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; width: 100%; background: linear-gradient(135deg, #1CA3B8 0%, #34C2D6 100%); color: #fff; padding: 16px 28px; border: none; border-radius: 12px; font-family: Assistant, system-ui, sans-serif; font-size: 18px; font-weight: 700; line-height: 1; box-shadow: 0 10px 25px -6px rgba(28,163,184,0.45); cursor: pointer; transition: filter 200ms, box-shadow 200ms, transform 200ms; } .ds-btn-primary:hover { filter: brightness(1.05); box-shadow: 0 10px 30px -8px rgba(15,42,71,0.20), 0 24px 60px -16px rgba(28,163,184,0.18); } .ds-btn-primary:active { transform: scale(0.98); } .ds-btn-primary:focus-visible { outline: none; box-shadow: 0 0 0 2px #fff, 0 0 0 4px #1CA3B8; }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Lead form field with bold label.",
+      "html": "<label class=\"ds-field\" dir=\"rtl\"><span class=\"ds-field-label\">עיר<span class=\"ds-field-req\"> *</span></span><input class=\"ds-input\" placeholder=\"לדוגמה: מודיעין\"></label>",
+      "css": ".ds-field { display: block; font-family: Assistant, system-ui, sans-serif; } .ds-field-label { display: block; margin-bottom: 6px; font-size: 14px; font-weight: 700; color: #13314F; } .ds-field-req { color: #188297; } .ds-input { width: 100%; background: #fff; border: 1px solid #AEC5DC; border-radius: 12px; padding: 12px 16px; font: inherit; font-size: 16px; color: #0A1E34; transition: border-color 200ms; } .ds-input::placeholder { color: #7E9FC2; } .ds-input:focus-visible { outline: none; border-color: #1CA3B8; box-shadow: 0 0 0 2px #fff, 0 0 0 4px #1CA3B8; }"
+    },
+    {
+      "name": "Header",
+      "kind": "nav",
+      "refersTo": "button-header-whatsapp",
+      "description": "Sticky white header with phone and pill WhatsApp.",
+      "html": "<header class=\"ds-header\" dir=\"rtl\"><strong class=\"ds-header-logo\">אלון עבודות בניה</strong><div class=\"ds-header-actions\"><a class=\"ds-header-phone\" href=\"#\" dir=\"ltr\">054-6217217</a><a class=\"ds-header-wa\" href=\"#\">וואטסאפ</a></div></header>",
+      "css": ".ds-header { display: flex; align-items: center; justify-content: space-between; height: 64px; padding: 0 20px; background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid #E4DCD4; font-family: Assistant, system-ui, sans-serif; } .ds-header-logo { color: #0A1E34; font-weight: 800; font-size: 18px; } .ds-header-actions { display: flex; gap: 12px; align-items: center; } .ds-header-phone { padding: 10px 16px; border-radius: 9999px; color: #0F2A47; font-weight: 700; font-size: 15px; text-decoration: none; transition: background 200ms; } .ds-header-phone:hover { background: #F1ECE7; } .ds-header-wa { padding: 10px 16px; border-radius: 9999px; background: #25D366; color: #fff; font-weight: 700; font-size: 15px; text-decoration: none; box-shadow: 0 6px 16px -6px rgba(37,211,102,0.65); transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-header-wa:hover { transform: translateY(-2px); } .ds-header-phone:focus-visible, .ds-header-wa:focus-visible { outline: none; box-shadow: 0 0 0 2px #fff, 0 0 0 4px #1CA3B8; }"
+    },
+    {
+      "name": "Callout Plate",
+      "kind": "custom",
+      "refersTo": "callout-label",
+      "description": "Architect-style annotation on a room photograph: teal pin, navy leader with white halo, white label.",
+      "html": "<div class=\"ds-plate\"><span class=\"ds-tag\">הדמיה להמחשה</span><div class=\"ds-callout\" style=\"left:62%;top:38%\"><span class=\"ds-pin\"></span><span class=\"ds-leader\"></span><span class=\"ds-label\">קרניז לתאורה נסתרת</span></div></div>",
+      "css": ".ds-plate { position: relative; width: 100%; aspect-ratio: 4 / 3; border-radius: 1.25rem; overflow: hidden; background: linear-gradient(180deg, #F8F5F2 0%, #E4DCD4 62%, #CFC4BA 62%, #7A6C62 100%); font-family: Assistant, system-ui, sans-serif; } .ds-callout { position: absolute; } .ds-pin { position: absolute; left: -7px; top: -7px; width: 14px; height: 14px; border-radius: 9999px; border: 3px solid #fff; background: #1CA3B8; box-sizing: border-box; box-shadow: 0 2px 8px rgba(10,30,52,0.35); } .ds-leader { position: absolute; top: -1px; right: 7px; width: 72px; height: 1.5px; background: rgba(10,30,52,0.75); box-shadow: 0 0 0 1px rgba(255,255,255,0.55); transform-origin: right center; transition: transform 520ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-plate:hover .ds-leader { transform: scaleX(1.08); } .ds-label { position: absolute; top: -15px; right: 82px; white-space: nowrap; background: rgba(255,255,255,0.95); padding: 6px 10px; border-radius: 6px; font-size: 13px; font-weight: 700; line-height: 1; color: #0A1E34; box-shadow: 0 4px 14px -4px rgba(10,30,52,0.35); } .ds-tag { position: absolute; bottom: 10px; left: 12px; background: rgba(6,18,31,0.6); color: #fff; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; line-height: 1; }"
+    },
+    {
+      "name": "Schedule Bars",
+      "kind": "custom",
+      "refersTo": "schedule-bar-unified",
+      "description": "Five-contractor bars with hatched waits merge into leaf one-contractor bars; teal delivery line.",
+      "html": "<div class=\"ds-sched\" dir=\"rtl\"><div class=\"ds-row\"><span class=\"ds-trade\">גבס</span><div class=\"ds-track\"><span class=\"ds-gap\" style=\"inset-inline-start:18%;width:10%\"></span><span class=\"ds-bar\" style=\"inset-inline-start:28%;width:16%\">גבסן</span></div></div><div class=\"ds-row\"><span class=\"ds-trade\">כל הפרויקט</span><div class=\"ds-track\"><span class=\"ds-bar ds-bar-one\" style=\"inset-inline-start:0;width:70%\">אלון</span><span class=\"ds-delivery\" style=\"inset-inline-start:70%\"></span></div></div></div>",
+      "css": ".ds-sched { background: #0A1E34; padding: 24px; border-radius: 1.25rem; font-family: Assistant, system-ui, sans-serif; display: grid; gap: 12px; } .ds-row { display: grid; grid-template-columns: 8rem 1fr; gap: 16px; align-items: center; } .ds-trade { color: #D6E2EE; font-size: 16px; font-weight: 600; } .ds-track { position: relative; height: 44px; border-radius: 6px; background: rgba(255,255,255,0.04); } .ds-bar { position: absolute; top: 0; bottom: 0; border-radius: 6px; background: #4E769F; color: #fff; font-size: 14px; font-weight: 700; line-height: 44px; padding: 0 12px; overflow: hidden; white-space: nowrap; transition: background-color 500ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-sched:hover .ds-bar { background: #2FAE7E; } .ds-bar-one { background: #2FAE7E; } .ds-gap { position: absolute; top: 6px; bottom: 6px; border-radius: 2px; background-image: repeating-linear-gradient(-45deg, rgba(238,243,248,0.2) 0 2px, transparent 2px 7px); } .ds-delivery { position: absolute; top: -8px; bottom: -8px; width: 1px; background: rgba(52,194,214,0.7); }"
+    },
+    {
+      "name": "Ruled List",
+      "kind": "card",
+      "description": "Chapter list between hairline rules with navy dots, instead of cards.",
+      "html": "<ul class=\"ds-ruled\" dir=\"rtl\"><li><span class=\"ds-dot\"></span>הנמכת תקרות וקרניזים לתאורה נסתרת</li><li><span class=\"ds-dot\"></span>נישות לטלוויזיה ולארונות, מזנונים</li></ul>",
+      "css": ".ds-ruled { list-style: none; margin: 0; padding: 0; border-top: 1px solid #E4DCD4; border-bottom: 1px solid #E4DCD4; font-family: Assistant, system-ui, sans-serif; } .ds-ruled li { display: flex; align-items: center; gap: 12px; padding: 12px 0; font-size: 15px; font-weight: 600; color: #13314F; } .ds-ruled li + li { border-top: 1px solid #E4DCD4; } .ds-dot { width: 6px; height: 6px; border-radius: 9999px; background: #7E9FC2; flex-shrink: 0; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Architect's Walkthrough",
+    "overview": "The brand reads like a set of construction drawings laid over a finished house. Navy is the ink the drawings are made in; plaster and white are the walls and floors they are drawn on; teal is the light that the finished work gives off. Pages are right-to-left Hebrew, set in Assistant at heavy weights, large and tight, with long calm paragraphs beneath. The finishing-works surface (`/avodot-gmar`) is the fullest expression: a walk through one home, room by room, where each photographed room carries architect-style callouts naming the trade that built it.\n\nDensity is low and deliberate. Sections alternate grounds (white, plaster, navy, deeper navy) instead of separating content with boxes, and lists are ruled with hairlines rather than wrapped in cards. Proof is stated plainly in ruled definition lists, never in badges. Every section keeps a way to reach a person: WhatsApp green and navy phone buttons recur at the top, in the hero, in the contact block and in a mobile bottom bar.\n\nThe homepage (`/`) shares the tokens with a darker, more marketing-led register: navy gradient hero, blueprint grid, white cards with soft navy shadows and a teal-gradient primary button. Both surfaces are the same brand; the finishing-works vocabulary is the more architectural of the two.",
+    "keyCharacteristics": [
+      "Navy as ink: headings, rules, drawings, leaders and the deep section grounds.",
+      "Plaster and gallery white as the ground; sections change ground instead of boxing content.",
+      "Teal is light, not decoration: pins, the delivery line, light washes, focus rings, the lead-form submit.",
+      "Leaf belongs to the one-contractor idea: the merged schedule bar and its \"one\" values.",
+      "Assistant 800, tight negative tracking, balanced line breaks; 17px body at 1.75 line height.",
+      "Hairline-ruled lists and definition rows instead of cards and icon tiles."
+    ],
+    "rules": [
+      { "name": "The Light-Line Rule", "body": "Teal marks light and the single conversion submit: pins, the delivery line, light washes, focus and the lead-form button. It is never a heading color, a section ground or a decorative fill on the finishing-works surface.", "section": "colors" },
+      { "name": "The One-Contractor Rule", "body": "Leaf appears only where the page states the one-contractor outcome. A leaf element anywhere else dilutes the one meaning it has.", "section": "colors" },
+      { "name": "The Ink-Not-Teal Leader Rule", "body": "Callout leader lines are navy at 75% with a white halo, so they read on both bright walls and dark floors; the teal pin carries the color.", "section": "colors" },
+      { "name": "The Heavy-and-Tight Rule", "body": "Every heading is weight 800 with negative tracking (-0.015em to -0.02em) and balanced wrapping. Lighter display weights are not part of this system.", "section": "typography" },
+      { "name": "The Short-Lines Rule", "body": "Multi-sentence headlines are set one sentence per line, so the rhythm of the statement is the layout.", "section": "typography" },
+      { "name": "The Photo-Only Lift Rule", "body": "On the finishing-works surface, shadows belong to elements floating over imagery or content (pins, labels, the mobile bar, the lead card). Sections, lists and text columns are never shadowed.", "section": "elevation" }
+    ],
+    "dos": [
+      "**Do** change the section ground (white, plaster-100, navy, navy-deep) to separate content instead of wrapping it in cards.",
+      "**Do** keep teal for light, pins, the delivery line, focus and the lead-form submit (The Light-Line Rule).",
+      "**Do** reserve leaf for the one-contractor result (The One-Contractor Rule).",
+      "**Do** set headings in Assistant 800 with -0.015em to -0.02em tracking and balanced wrapping.",
+      "**Do** draw callout leaders in navy at 75% with a white halo, and show final states under reduced motion.",
+      "**Do** label every AI-generated plate as a simulation.",
+      "**Do** offer WhatsApp (green) and phone (navy) together wherever a section asks for contact."
+    ],
+    "donts": [
+      "**Don't** use teal or leaf as a heading color or a section ground on the finishing-works surface.",
+      "**Don't** shadow sections, lists or text columns; shadows lift only what floats over imagery or content.",
+      "**Don't** animate a callout plate that is already on screen at load; its leaders must never visibly erase and redraw.",
+      "**Don't** present AI-generated room images as specific completed client projects."
+    ]
+  }
+}
