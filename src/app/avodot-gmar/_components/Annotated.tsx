@@ -27,7 +27,7 @@ function useDrawOnView<T extends HTMLElement>(threshold = 0.45) {
     const el = ref.current;
     if (!el) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    if (el.getBoundingClientRect().top < window.innerHeight * 0.85) return;
+    if (el.getBoundingClientRect().top < window.innerHeight) return;
     setPhase("armed");
     let raf = requestAnimationFrame(() => {
       raf = requestAnimationFrame(() => setReady(true));

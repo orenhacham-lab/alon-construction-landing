@@ -121,8 +121,8 @@ export function ScheduleCompare() {
               <span className="text-sm font-semibold leading-tight text-navy-100 sm:text-base">
                 {row.trade}
                 <span className="relative block h-4 text-xs font-medium text-navy-300 sm:hidden">
-                  <Swap show={!unified} delay={delay}>{row.contractor}</Swap>
-                  <Swap show={unified} delay={delay}>אלון</Swap>
+                  <Swap show={!unified} delay={delay} quickOut={!unified}>{row.contractor}</Swap>
+                  <Swap show={unified} delay={delay} quickOut={!unified}>אלון</Swap>
                 </span>
               </span>
               <div className="gm-track relative h-11 rounded-md bg-white/[0.04]">
@@ -142,10 +142,10 @@ export function ScheduleCompare() {
                   }}
                 >
                   <span className="relative hidden h-full text-sm font-bold text-white sm:block">
-                    <Swap show={!unified} delay={delay} className="px-3 leading-[2.75rem]">
+                    <Swap show={!unified} delay={delay} quickOut={!unified} className="px-3 leading-[2.75rem]">
                       {row.before[1] - row.before[0] >= 11 ? row.contractor : ""}
                     </Swap>
-                    <Swap show={unified} delay={delay} className="px-3 leading-[2.75rem]">
+                    <Swap show={unified} delay={delay} quickOut={!unified} className="px-3 leading-[2.75rem]">
                       {row.after[1] - row.after[0] >= 8 ? "אלון" : ""}
                     </Swap>
                   </span>
@@ -223,11 +223,14 @@ export function ScheduleCompare() {
 function Swap({
   show,
   delay,
+  quickOut,
   className = "",
   children,
 }: {
   show: boolean;
   delay: string;
+  /** בחזרה לחמישה קבלנים הפסים מתכווצים מהר: התווית היוצאת נעלמת מיד */
+  quickOut: boolean;
   className?: string;
   children: React.ReactNode;
 }) {
@@ -236,7 +239,12 @@ function Swap({
       className={`gm-swap absolute inset-0 block truncate ${className}`}
       style={{
         opacity: show ? 1 : 0,
-        transitionDelay: show ? `calc(${delay} + var(--gm-dur) * 0.6)` : `calc(${delay} + var(--gm-dur) * 0.5)`,
+        transitionDelay: show
+          ? `calc(${delay} + var(--gm-dur) * 0.6)`
+          : quickOut
+            ? delay
+            : `calc(${delay} + var(--gm-dur) * 0.5)`,
+        transitionDuration: !show && quickOut ? "100ms" : undefined,
       }}
     >
       {children}
